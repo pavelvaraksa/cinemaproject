@@ -10,8 +10,8 @@ import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Time;
+import java.util.Date;
 
 @Setter
 @Getter
@@ -24,9 +24,9 @@ public class Event {
 
     Long id;
 
-    LocalDate date;
+    Date date;
 
-    LocalTime time;
+    Time time;
 
     Long movieId;
 
