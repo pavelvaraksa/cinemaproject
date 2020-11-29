@@ -9,12 +9,14 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private static final Logger log = Logger.getLogger(UserRepositoryImpl.class);
@@ -39,8 +41,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User findById(Long key) {
-        return jdbcTemplate.queryForObject("select * from m_user where id = ?", new Object[]{key}, this::getUserRowMapper);
+    public User findById(Long userId) {
+        return jdbcTemplate.queryForObject("select * from m_user where id = ?", new Object[]{userId}, this::getUserRowMapper);
     }
 
     @Override
