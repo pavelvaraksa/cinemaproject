@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication(scanBasePackages = "by.itacademy")
 @Import({})
-class SpringBootApplicationStarter {
+public class SpringBootApplicationStarter {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootApplicationStarter.class, args);
