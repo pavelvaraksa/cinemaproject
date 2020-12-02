@@ -24,6 +24,11 @@ public class EventRepositoryImpl implements EventRepository {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    public EventRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     private Event getEventRowMapper(ResultSet rs, int i) throws SQLException {
         Event event = new Event();
         event.setId(rs.getLong(EventColumns.ID));

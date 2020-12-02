@@ -24,6 +24,11 @@ public class TicketRepositoryImpl implements TicketRepository {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    public TicketRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     private Ticket getTicketRowMapper(ResultSet rs, int i) throws SQLException {
         Ticket ticket = new Ticket();
         ticket.setId(rs.getLong(TicketColumns.ID));

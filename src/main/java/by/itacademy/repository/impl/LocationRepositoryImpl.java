@@ -24,6 +24,11 @@ public class LocationRepositoryImpl implements LocationRepository {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    public LocationRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     private Location getLocationRowMapper(ResultSet rs, int i) throws SQLException {
         Location location = new Location();
         location.setId(rs.getLong(LocationColumns.ID));

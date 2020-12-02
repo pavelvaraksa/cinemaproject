@@ -24,6 +24,11 @@ public class CinemaRepositoryImpl implements CinemaRepository {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    public CinemaRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     private Cinema getCinemaRowMapper(ResultSet rs, int i) throws SQLException {
         Cinema cinema = new Cinema();
         cinema.setId(rs.getLong(CinemaColumns.ID));

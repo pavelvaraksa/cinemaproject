@@ -24,6 +24,11 @@ public class MovieRepositoryImpl implements MovieRepository {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    public MovieRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     private Movie getMovieRowMapper(ResultSet rs, int i) throws SQLException {
         Movie movie = new Movie();
         movie.setId(rs.getLong(MovieColumns.ID));
