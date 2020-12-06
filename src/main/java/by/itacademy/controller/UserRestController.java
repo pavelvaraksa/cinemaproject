@@ -35,7 +35,6 @@ public class UserRestController {
         User user = new User();
         user.setLogin(userCreateRequest.getLogin());
         user.setPassword(userCreateRequest.getPassword());
-        user.setRole(userCreateRequest.getRole());
         user.setCreated(new Timestamp(System.currentTimeMillis()));
         user.setChanged(new Timestamp(System.currentTimeMillis()));
         return userService.save(user);
@@ -50,14 +49,13 @@ public class UserRestController {
 
         user.setLogin(userCreateRequest.getLogin());
         user.setPassword(userCreateRequest.getPassword());
-        user.setRole(userCreateRequest.getRole());
         user.setChanged(new Timestamp(System.currentTimeMillis()));
         return userService.update(user);
     }
 
-    @DeleteMapping("/{user}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteUser(@PathVariable User user) {
-        return userService.delete(user);
+    public Long deleteUser(@PathVariable Long id) {
+        return userService.delete(id);
     }
 }

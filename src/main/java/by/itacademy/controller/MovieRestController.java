@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,8 @@ public class MovieRestController {
         movie.setGenre(movieCreateRequest.getGenre());
         movie.setYear(movieCreateRequest.getYear());
         movie.setDuration(movieCreateRequest.getDuration());
+        movie.setCreated(new Timestamp(System.currentTimeMillis()));
+        movie.setChanged(new Timestamp(System.currentTimeMillis()));
         return movieService.save(movie);
     }
 
@@ -50,12 +53,13 @@ public class MovieRestController {
         movie.setGenre(movieCreateRequest.getGenre());
         movie.setYear(movieCreateRequest.getYear());
         movie.setDuration(movieCreateRequest.getDuration());
+        movie.setChanged(new Timestamp(System.currentTimeMillis()));
         return movieService.update(movie);
     }
 
     @DeleteMapping("/{movie}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteMovie(@PathVariable Movie movie) {
+    public Long deleteMovie(@PathVariable Long movie) {
         return movieService.delete(movie);
     }
 }

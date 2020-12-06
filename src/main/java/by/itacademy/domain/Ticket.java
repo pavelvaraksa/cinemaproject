@@ -10,6 +10,8 @@ import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -19,15 +21,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Ticket {
 
-    Long id;
+    private Long id;
 
-    int placeNumber;
+    private int placeNumber;
 
-    int price;
+    private int price;
 
-    Long userId;
+    private Timestamp created;
 
-    Long eventId;
+    private Timestamp changed;
+
+    private Long userId;
+
+    private Long eventId;
 
     @Override
     public String toString() {

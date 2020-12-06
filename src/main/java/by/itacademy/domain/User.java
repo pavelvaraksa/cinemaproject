@@ -1,6 +1,11 @@
 package by.itacademy.domain;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -16,17 +21,15 @@ import java.sql.Timestamp;
 
 public class User {
 
-    Long id;
+    private Long id;
 
-    String login;
+    private String login;
 
-    String password;
+    private String password;
 
-    String role;
+    private Timestamp created;
 
-    Timestamp created;
-
-    Timestamp changed;
+    private Timestamp changed;
 
     @Override
     public String toString() {

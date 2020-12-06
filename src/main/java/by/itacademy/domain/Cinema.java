@@ -1,9 +1,16 @@
 package by.itacademy.domain;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.sql.Timestamp;
 
 @Setter
 @Getter
@@ -14,19 +21,23 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Cinema {
 
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    int ticketsCount;
+    private int ticketsCount;
 
-    int phoneNumber;
+    private String phoneNumber;
 
-    String paymentMethod;
+    private String paymentMethod;
 
-    Long locationId;
+    private Timestamp created;
 
-    Long movieId;
+    private Timestamp changed;
+
+    private Long locationId;
+
+    private Long movieId;
 
     @Override
     public String toString() {

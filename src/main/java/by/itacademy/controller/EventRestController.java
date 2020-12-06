@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,8 @@ public class EventRestController {
         Event event = new Event();
         event.setDate(eventCreateRequest.getDate());
         event.setTime(eventCreateRequest.getTime());
+        event.setCreated(new Timestamp(System.currentTimeMillis()));
+        event.setChanged(new Timestamp(System.currentTimeMillis()));
         event.setMovieId(eventCreateRequest.getMovieId());
         event.setCinemaId(eventCreateRequest.getCinemaId());
         return eventService.save(event);
@@ -48,6 +51,7 @@ public class EventRestController {
 
         event.setDate(eventCreateRequest.getDate());
         event.setTime(eventCreateRequest.getTime());
+        event.setChanged(new Timestamp(System.currentTimeMillis()));
         event.setMovieId(eventCreateRequest.getMovieId());
         event.setCinemaId(eventCreateRequest.getCinemaId());
         return eventService.update(event);
@@ -55,7 +59,7 @@ public class EventRestController {
 
     @DeleteMapping("/{event}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteEvent(@PathVariable Event event) {
+    public Long deleteEvent(@PathVariable Long event) {
         return eventService.delete(event);
     }
 }

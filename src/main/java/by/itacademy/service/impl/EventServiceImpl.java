@@ -1,7 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Event;
-import by.itacademy.repository.EventRepository;
+import by.itacademy.dao.jdbctemplate.EventRepository;
 import by.itacademy.service.EventService;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Long delete(Event event) {
+    public Long delete(Long event) {
         return eventRepository.delete(event);
     }
 }

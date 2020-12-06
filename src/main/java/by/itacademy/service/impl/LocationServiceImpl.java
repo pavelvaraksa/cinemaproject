@@ -1,7 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Location;
-import by.itacademy.repository.LocationRepository;
+import by.itacademy.dao.jdbctemplate.LocationRepository;
 import by.itacademy.service.LocationService;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Long delete(Location location) {
+    public Long delete(Long location) {
         return locationRepository.delete(location);
     }
 }

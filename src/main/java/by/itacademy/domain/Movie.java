@@ -9,6 +9,8 @@ import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -18,15 +20,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Movie {
 
-    Long id;
+    private Long id;
 
-    String title;
+    private String title;
 
-    String genre;
+    private String genre;
 
-    int year;
+    private int year;
 
-    int duration;
+    private int duration;
+
+    private Timestamp created;
+
+    private Timestamp changed;
 
     @Override
     public String toString() {

@@ -14,5 +14,5 @@ public interface CinemaService {
 
     Cinema update(Cinema cinema);
 
-    Long delete(Cinema cinema);
+    Long delete(Long cinema);
 }

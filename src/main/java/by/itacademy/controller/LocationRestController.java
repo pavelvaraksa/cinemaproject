@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -33,6 +34,8 @@ public class LocationRestController {
     public Location saveLocation(@RequestBody LocationCreateRequest locationCreateRequest) {
         Location location = new Location();
         location.setLocation(locationCreateRequest.getLocation());
+        location.setCreated(new Timestamp(System.currentTimeMillis()));
+        location.setChanged(new Timestamp(System.currentTimeMillis()));
         return locationService.save(location);
     }
 
@@ -44,12 +47,13 @@ public class LocationRestController {
         Location location = locationService.findById(id);
 
         location.setLocation(locationCreateRequest.getLocation());
+        location.setChanged(new Timestamp(System.currentTimeMillis()));
         return locationService.update(location);
     }
 
     @DeleteMapping("/{location}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteLocation(@PathVariable Location location) {
+    public Long deleteLocation(@PathVariable Long location) {
         return locationService.delete(location);
     }
 }

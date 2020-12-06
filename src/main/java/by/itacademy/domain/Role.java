@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
+import java.security.Timestamp;
+
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -23,6 +25,10 @@ public class Role {
     private SystemRoles managerName = SystemRoles.ROLE_MANAGER;
 
     private SystemRoles userName = SystemRoles.ROLE_USER;
+
+    private Timestamp created;
+
+    private Timestamp changed;
 
     private Long adminId;
 

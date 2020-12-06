@@ -9,7 +9,7 @@ public class CinemaCreateRequest {
 
     private int ticketsCount;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String paymentMethod;
 

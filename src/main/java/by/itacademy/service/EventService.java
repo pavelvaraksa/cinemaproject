@@ -14,5 +14,5 @@ public interface EventService {
 
     Event update(Event event);
 
-    Long delete(Event event);
+    Long delete(Long event);
 }

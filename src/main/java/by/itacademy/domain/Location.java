@@ -10,6 +10,8 @@ import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.sql.Timestamp;
+
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -19,9 +21,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Location {
 
-    Long id;
+    private Long id;
 
-    String location;
+    private String location;
+
+    private Timestamp created;
+
+    private Timestamp changed;
 
     @Override
     public String toString() {

@@ -1,7 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Cinema;
-import by.itacademy.repository.CinemaRepository;
+import by.itacademy.dao.jdbctemplate.CinemaRepository;
 import by.itacademy.service.CinemaService;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public Long delete(Cinema cinema) {
+    public Long delete(Long cinema) {
         return cinemaRepository.delete(cinema);
     }
 }

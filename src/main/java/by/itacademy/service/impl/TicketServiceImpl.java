@@ -1,7 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Ticket;
-import by.itacademy.repository.TicketRepository;
+import by.itacademy.dao.jdbctemplate.TicketRepository;
 import by.itacademy.service.TicketService;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Long delete(Ticket ticket) {
+    public Long delete(Long ticket) {
         return ticketRepository.delete(ticket);
     }
 }

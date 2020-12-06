@@ -1,7 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.User;
-import by.itacademy.repository.UserRepository;
+import by.itacademy.dao.jdbctemplate.UserRepository;
 import by.itacademy.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long delete(User user) {
-        return userRepository.delete(user);
+    public Long delete(Long userId) {
+        return userRepository.delete(userId);
     }
 }

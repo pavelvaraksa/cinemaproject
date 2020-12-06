@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,8 @@ public class TicketRestController {
         Ticket ticket = new Ticket();
         ticket.setPlaceNumber(ticketCreateRequest.getPlaceNumber());
         ticket.setPrice(ticketCreateRequest.getPrice());
+        ticket.setCreated(new Timestamp(System.currentTimeMillis()));
+        ticket.setChanged(new Timestamp(System.currentTimeMillis()));
         ticket.setUserId(ticketCreateRequest.getUserId());
         ticket.setEventId(ticketCreateRequest.getEventId());
         return ticketService.save(ticket);
@@ -48,6 +51,7 @@ public class TicketRestController {
 
         ticket.setPlaceNumber(ticketCreateRequest.getPlaceNumber());
         ticket.setPrice(ticketCreateRequest.getPrice());
+        ticket.setChanged(new Timestamp(System.currentTimeMillis()));
         ticket.setUserId(ticketCreateRequest.getUserId());
         ticket.setEventId(ticketCreateRequest.getEventId());
         return ticketService.update(ticket);
@@ -55,7 +59,7 @@ public class TicketRestController {
 
     @DeleteMapping("/{ticket}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteTicket(@PathVariable Ticket ticket) {
+    public Long deleteTicket(@PathVariable Long ticket) {
         return ticketService.delete(ticket);
     }
 }

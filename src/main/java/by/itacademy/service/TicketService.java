@@ -14,5 +14,5 @@ public interface TicketService {
 
     Ticket update(Ticket ticket);
 
-    Long delete(Ticket ticket);
+    Long delete(Long ticket);
 }

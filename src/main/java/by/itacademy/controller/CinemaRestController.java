@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,8 @@ public class CinemaRestController {
         cinema.setTicketsCount(cinemaCreateRequest.getTicketsCount());
         cinema.setPhoneNumber(cinemaCreateRequest.getPhoneNumber());
         cinema.setPaymentMethod(cinemaCreateRequest.getPaymentMethod());
+        cinema.setCreated(new Timestamp(System.currentTimeMillis()));
+        cinema.setChanged(new Timestamp(System.currentTimeMillis()));
         cinema.setLocationId(cinemaCreateRequest.getLocationId());
         cinema.setMovieId(cinemaCreateRequest.getMovieId());
         return cinemaService.save(cinema);
@@ -52,6 +55,7 @@ public class CinemaRestController {
         cinema.setTicketsCount(cinemaCreateRequest.getTicketsCount());
         cinema.setPhoneNumber(cinemaCreateRequest.getPhoneNumber());
         cinema.setPaymentMethod(cinemaCreateRequest.getPaymentMethod());
+        cinema.setChanged(new Timestamp(System.currentTimeMillis()));
         cinema.setLocationId(cinemaCreateRequest.getLocationId());
         cinema.setMovieId(cinemaCreateRequest.getMovieId());
         return cinemaService.update(cinema);
@@ -59,7 +63,7 @@ public class CinemaRestController {
 
     @DeleteMapping("/{cinema}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteCinema(@PathVariable Cinema cinema) {
+    public Long deleteCinema(@PathVariable Long cinema) {
         return cinemaService.delete(cinema);
     }
 }

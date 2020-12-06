@@ -10,6 +10,7 @@ import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.sql.Timestamp;
 import java.sql.Time;
 import java.util.Date;
 
@@ -22,15 +23,19 @@ import java.util.Date;
 
 public class Event {
 
-    Long id;
+    private Long id;
 
-    Date date;
+    private Date date;
 
-    Time time;
+    private Time time;
 
-    Long movieId;
+    private Timestamp created;
 
-    Long cinemaId;
+    private Timestamp changed;
+
+    private Long movieId;
+
+    private Long cinemaId;
 
     @Override
     public String toString() {
