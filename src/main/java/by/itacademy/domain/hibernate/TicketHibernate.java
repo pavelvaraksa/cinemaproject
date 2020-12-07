@@ -20,7 +20,7 @@ public class TicketHibernate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "place_number")
     private int placeNumber;
 
     @Column
@@ -32,9 +32,9 @@ public class TicketHibernate {
     @Column
     private Timestamp changed;
 
-    @Column
+    @Column(name = "user_id")
     private Long userId;
 
-    @Column
+    @Column(name = "event_id")
     private Long eventId;
 }

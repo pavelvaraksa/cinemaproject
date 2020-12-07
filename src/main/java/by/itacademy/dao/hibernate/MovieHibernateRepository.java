@@ -1,7 +1,7 @@
 package by.itacademy.dao.hibernate;
 
 import by.itacademy.dao.jdbctemplate.CrudRepository;
-import by.itacademy.domain.Movie;
+import by.itacademy.domain.hibernate.MovieHibernate;
 
-public interface MovieHibernateRepository extends CrudRepository<Long, Movie> {
+public interface MovieHibernateRepository extends CrudRepository<Long, MovieHibernate> {
 }

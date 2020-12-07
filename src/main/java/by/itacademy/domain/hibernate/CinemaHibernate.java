@@ -23,13 +23,13 @@ public class CinemaHibernate {
     @Column
     private String name;
 
-    @Column
+    @Column(name = "tickets_count")
     private int ticketsCount;
 
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column
+    @Column(name = "payment_method")
     private String paymentMethod;
 
     @Column
@@ -38,9 +38,9 @@ public class CinemaHibernate {
     @Column
     private Timestamp changed;
 
-    @Column
+    @Column(name = "location_id")
     private Long locationId;
 
-    @Column
+    @Column(name = "movie_id")
     private Long movieId;
 }

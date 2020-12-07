@@ -34,9 +34,9 @@ public class EventHibernate {
     @Column
     private Timestamp changed;
 
-    @Column
+    @Column(name = "movie_id")
     private Long movieId;
 
-    @Column
+    @Column(name = "cinema_id")
     private Long cinemaId;
 }
