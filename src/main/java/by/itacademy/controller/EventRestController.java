@@ -57,9 +57,9 @@ public class EventRestController {
         return eventService.update(event);
     }
 
-    @DeleteMapping("/{event}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteEvent(@PathVariable Long event) {
-        return eventService.delete(event);
+    public Long deleteEvent(@PathVariable Long id) {
+        return eventService.delete(id);
     }
 }

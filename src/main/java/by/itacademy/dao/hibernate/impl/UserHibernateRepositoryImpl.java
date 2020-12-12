@@ -59,7 +59,10 @@ public class UserHibernateRepositoryImpl implements UserHibernateRepository {
     @Override
     public Long delete(Long userHibernateId) {
         try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
             session.delete(userHibernateId);
+            transaction.commit();
             return userHibernateId;
         }
     }

@@ -51,9 +51,9 @@ public class LocationRestController {
         return locationService.update(location);
     }
 
-    @DeleteMapping("/{location}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteLocation(@PathVariable Long location) {
-        return locationService.delete(location);
+    public Long deleteLocation(@PathVariable Long id) {
+        return locationService.delete(id);
     }
 }

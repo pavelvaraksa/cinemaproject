@@ -2,8 +2,9 @@ package by.itacademy.controller.request;
 
 import lombok.Data;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
+
 
 @Data
 public class EventCreateRequest {

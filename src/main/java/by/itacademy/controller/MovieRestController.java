@@ -57,9 +57,9 @@ public class MovieRestController {
         return movieService.update(movie);
     }
 
-    @DeleteMapping("/{movie}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteMovie(@PathVariable Long movie) {
-        return movieService.delete(movie);
+    public Long deleteMovie(@PathVariable Long id) {
+        return movieService.delete(id);
     }
 }

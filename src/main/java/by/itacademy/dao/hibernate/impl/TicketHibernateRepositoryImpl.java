@@ -18,7 +18,7 @@ public class TicketHibernateRepositoryImpl implements TicketHibernateRepository 
 
     private final SessionFactory sessionFactory;
 
-    private TicketHibernateRepositoryImpl(SessionFactory sessionFactory) {
+    public TicketHibernateRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -59,7 +59,10 @@ public class TicketHibernateRepositoryImpl implements TicketHibernateRepository 
     @Override
     public Long delete(Long ticketHibernateId) {
         try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
             session.delete(ticketHibernateId);
+            transaction.commit();
             return ticketHibernateId;
         }
     }

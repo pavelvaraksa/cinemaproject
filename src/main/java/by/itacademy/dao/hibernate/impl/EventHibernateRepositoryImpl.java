@@ -59,7 +59,10 @@ public class EventHibernateRepositoryImpl implements EventHibernateRepository {
     @Override
     public Long delete(Long eventHibernateId) {
         try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
             session.delete(eventHibernateId);
+            transaction.commit();
             return eventHibernateId;
         }
     }

@@ -6,7 +6,7 @@ public interface CrudRepository<K, V> {
 
     List<V> findAll();
 
-    V findById(K key);
+    V findById(K object);
 
     V save(V object);
 

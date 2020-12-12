@@ -61,9 +61,9 @@ public class CinemaRestController {
         return cinemaService.update(cinema);
     }
 
-    @DeleteMapping("/{cinema}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteCinema(@PathVariable Long cinema) {
-        return cinemaService.delete(cinema);
+    public Long deleteCinema(@PathVariable Long id) {
+        return cinemaService.delete(id);
     }
 }

@@ -59,7 +59,10 @@ public class MovieHibernateRepositoryImpl implements MovieHibernateRepository {
     @Override
     public Long delete(Long movieHibernateId) {
         try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
             session.delete(movieHibernateId);
+            transaction.commit();
             return movieHibernateId;
         }
     }

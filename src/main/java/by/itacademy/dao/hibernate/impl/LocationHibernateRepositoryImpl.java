@@ -59,7 +59,10 @@ public class LocationHibernateRepositoryImpl implements LocationHibernateReposit
     @Override
     public Long delete(Long locationHibernateId) {
         try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
             session.delete(locationHibernateId);
+            transaction.commit();
             return locationHibernateId;
         }
     }

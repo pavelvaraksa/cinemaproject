@@ -57,9 +57,9 @@ public class TicketRestController {
         return ticketService.update(ticket);
     }
 
-    @DeleteMapping("/{ticket}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteTicket(@PathVariable Long ticket) {
-        return ticketService.delete(ticket);
+    public Long deleteTicket(@PathVariable Long id) {
+        return ticketService.delete(id);
     }
 }

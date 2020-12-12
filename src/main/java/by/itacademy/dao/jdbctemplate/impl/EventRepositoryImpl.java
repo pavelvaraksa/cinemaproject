@@ -3,6 +3,7 @@ package by.itacademy.dao.jdbctemplate.impl;
 import by.itacademy.dao.jdbctemplate.EventRepository;
 import by.itacademy.dao.jdbctemplate.columns.EventColumn;
 import by.itacademy.domain.Event;
+import by.itacademy.domain.User;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

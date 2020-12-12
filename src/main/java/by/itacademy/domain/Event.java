@@ -10,9 +10,9 @@ import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.sql.Time;
-import java.util.Date;
 
 @Setter
 @Getter
