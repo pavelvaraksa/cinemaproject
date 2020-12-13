@@ -3,7 +3,7 @@ package by.itacademy.dao.jdbctemplate.impl;
 import by.itacademy.dao.jdbctemplate.LocationRepository;
 import by.itacademy.dao.jdbctemplate.columns.LocationColumn;
 import by.itacademy.domain.Location;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,10 +17,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+@Log4j
 @Repository
 public class LocationRepositoryImpl implements LocationRepository {
-
-    private static final Logger log = Logger.getLogger(LocationRepositoryImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;

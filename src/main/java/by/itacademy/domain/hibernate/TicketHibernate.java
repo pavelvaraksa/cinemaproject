@@ -24,7 +24,7 @@ public class TicketHibernate {
     private int placeNumber;
 
     @Column
-    private int price;
+    private double price;
 
     @Column
     private Timestamp created;

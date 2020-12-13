@@ -2,7 +2,7 @@ package by.itacademy.dao.hibernate.impl;
 
 import by.itacademy.dao.hibernate.TicketHibernateRepository;
 import by.itacademy.domain.hibernate.TicketHibernate;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @Primary
-@Log4j2
+@Log4j
 public class TicketHibernateRepositoryImpl implements TicketHibernateRepository {
 
     private final SessionFactory sessionFactory;

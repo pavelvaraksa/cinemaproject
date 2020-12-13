@@ -3,9 +3,7 @@ package by.itacademy.dao.jdbctemplate.impl;
 import by.itacademy.dao.jdbctemplate.CinemaRepository;
 import by.itacademy.dao.jdbctemplate.columns.CinemaColumn;
 import by.itacademy.domain.Cinema;
-import lombok.extern.log4j.Log4j2;
-import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Primary;
+import lombok.extern.log4j.Log4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,10 +17,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+@Log4j
 @Repository
 public class CinemaRepositoryImpl implements CinemaRepository {
-
-    private static final Logger log = Logger.getLogger(CinemaRepositoryImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -58,7 +55,7 @@ public class CinemaRepositoryImpl implements CinemaRepository {
 
     @Override
     public Cinema save(Cinema cinema) {
-        final String createQuery = "insert into m_cinema (name, ticketsCount, phoneNumber, paymentMethod, created, changed, locationId, movieId) " +
+        final String createQuery = "insert into m_cinema (name, tickets_count, phone_number, payment_method, created, changed, location_id, movie_id) " +
                 "values (:name, :ticketsCount, :phoneNumber, :paymentMethod, :created, :changed, :locationId, :movieId);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -84,12 +81,12 @@ public class CinemaRepositoryImpl implements CinemaRepository {
     public Cinema update(Cinema cinema) {
         final String updateQuery = "update m_cinema set " +
                 "name = :name, " +
-                "ticketsCount = :ticketsCount, " +
-                "phoneNumber = :phoneNumber, " +
-                "paymentMethod = :paymentMethod, " +
+                "tickets_count = :ticketsCount, " +
+                "phone_number = :phoneNumber, " +
+                "payment_method = :paymentMethod, " +
                 "changed = :changed, " +
-                "locationId = :locationId, " +
-                "movieId = :movieId, " +
+                "location_id = :locationId, " +
+                "movie_id = :movieId, " +
                 "where id = :id";
 
         MapSqlParameterSource params = new MapSqlParameterSource();

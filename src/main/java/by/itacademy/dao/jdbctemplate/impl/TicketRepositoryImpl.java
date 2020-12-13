@@ -3,7 +3,7 @@ package by.itacademy.dao.jdbctemplate.impl;
 import by.itacademy.dao.jdbctemplate.TicketRepository;
 import by.itacademy.dao.jdbctemplate.columns.TicketColumn;
 import by.itacademy.domain.Ticket;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,10 +17,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+@Log4j
 @Repository
 public class TicketRepositoryImpl implements TicketRepository {
-
-    private static final Logger log = Logger.getLogger(TicketRepositoryImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -54,7 +53,7 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Ticket save(Ticket ticket) {
-        final String createQuery = "insert into m_ticket (placeNumber, price, created, changed, userId, eventId) " +
+        final String createQuery = "insert into m_ticket (place_number, price, created, changed, user_id, event_id) " +
                 "values (:placeNumber, :price, :created, :changed, :userId, :eventId);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -77,11 +76,11 @@ public class TicketRepositoryImpl implements TicketRepository {
     @Override
     public Ticket update(Ticket ticket) {
         final String updateQuery = "update m_ticket set " +
-                "placeNumber = :placeNumber, " +
+                "place_number = :placeNumber, " +
                 "price = :price, " +
                 "changed = :changed, " +
-                "userId = :userId, " +
-                "eventId = :eventId " +
+                "user_id = :userId, " +
+                "event_id = :eventId " +
                 "where id = :id";
 
         MapSqlParameterSource params = new MapSqlParameterSource();

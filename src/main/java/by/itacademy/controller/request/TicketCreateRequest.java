@@ -7,7 +7,7 @@ public class TicketCreateRequest {
 
     private int placeNumber;
 
-    private int price;
+    private double price;
 
     private Long userId;
 

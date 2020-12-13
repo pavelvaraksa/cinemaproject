@@ -2,7 +2,9 @@ package by.itacademy.controller.hibernate;
 
 import by.itacademy.controller.request.UserCreateRequest;
 import by.itacademy.dao.hibernate.UserHibernateRepository;
+import by.itacademy.domain.SystemRoles;
 import by.itacademy.domain.hibernate.UserHibernate;
+import by.itacademy.domain.hibernate.UserRoleHibernate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,7 @@ public class UserHibernateController {
         user.setPassword(userCreateRequest.getPassword());
         user.setCreated(new Timestamp(System.currentTimeMillis()));
         user.setChanged(new Timestamp(System.currentTimeMillis()));
+        user.setRole(new UserRoleHibernate(SystemRoles.ROLE_USER, user));
 
         return userHibernateRepository.save(user);
     }

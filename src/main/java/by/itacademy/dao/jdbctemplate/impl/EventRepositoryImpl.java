@@ -3,8 +3,7 @@ package by.itacademy.dao.jdbctemplate.impl;
 import by.itacademy.dao.jdbctemplate.EventRepository;
 import by.itacademy.dao.jdbctemplate.columns.EventColumn;
 import by.itacademy.domain.Event;
-import by.itacademy.domain.User;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,10 +17,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+@Log4j
 @Repository
 public class EventRepositoryImpl implements EventRepository {
-
-    private static final Logger log = Logger.getLogger(EventRepositoryImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -55,7 +53,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public Event save(Event event) {
-        final String createQuery = "insert into m_event (date, time, created, changed, movieId, cinemaId) " +
+        final String createQuery = "insert into m_event (date, time, created, changed, movie_id, cinema_id) " +
                 "values (:date, :time, :created, :changed, :movieId, :cinemaId);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -81,8 +79,8 @@ public class EventRepositoryImpl implements EventRepository {
                 "date = :date, " +
                 "time = :time, " +
                 "changed = :changed, " +
-                "movieId = :movieId, " +
-                "cinemaId = :cinemaId " +
+                "movie_id = :movieId, " +
+                "cinema_id = :cinemaId " +
                 "where id = :id";
 
         MapSqlParameterSource params = new MapSqlParameterSource();

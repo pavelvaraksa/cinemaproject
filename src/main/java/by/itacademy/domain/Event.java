@@ -1,11 +1,6 @@
 package by.itacademy.domain;
 
-import lombok.Setter;
-import lombok.Getter;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Data;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -14,13 +9,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.sql.Time;
 
-@Setter
-@Getter
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-
+@Data
 public class Event {
 
     private Long id;
