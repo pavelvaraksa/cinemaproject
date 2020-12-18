@@ -4,10 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <modules>
+        <module>common</module>
+        <module>api</module>
+    </modules>
+
     <groupId>by.itacademy</groupId>
     <artifactId>CinemaProject</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <properties>
         <log4j>1.2.17</log4j>
@@ -15,12 +27,7 @@
         <swagger.version>2.9.2</swagger.version>
     </properties>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
-        <relativePath/>
-    </parent>
+
 
     <dependencies>
 

@@ -1,0 +1,12 @@
+2020-12-13 01:28:30 INFO  UserHibernateRepositoryImpl:28 - Find:
+2020-12-13 01:32:24 ERROR UserHibernateRepositoryImpl:28 - Find:
+2020-12-13 01:33:50 ERROR UserHibernateRepositoryImpl:28 - Find:
+2020-12-13 01:42:50 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@21c71a59, started on Sun Dec 13 01:42:44 MSK 2020
+2020-12-13 18:51:17 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3d379ff7, started on Sun Dec 13 18:51:11 MSK 2020
+2020-12-13 18:59:43 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5855925f, started on Sun Dec 13 18:59:37 MSK 2020
+2020-12-13 19:03:37 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2722bd45, started on Sun Dec 13 19:03:31 MSK 2020
+2020-12-13 19:06:50 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2af9c73, started on Sun Dec 13 19:06:45 MSK 2020
+2020-12-13 19:27:53 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3137dac, started on Sun Dec 13 19:27:47 MSK 2020
+2020-12-13 21:25:29 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1afe18d8, started on Sun Dec 13 21:25:24 MSK 2020
+2020-12-13 21:30:39 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@30d103d3, started on Sun Dec 13 21:30:34 MSK 2020
+2020-12-13 21:39:35 INFO  CinemaApplicationStarter:21 - org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6d85f273, started on Sun Dec 13 21:39:29 MSK 2020
