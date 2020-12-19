@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "m_user")
-@EqualsAndHashCode(exclude = {"roles"})
+@EqualsAndHashCode(exclude = {"roles", "tickets"})
 public class UserApp {
 
     @Id
@@ -35,4 +35,8 @@ public class UserApp {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<UserRoleApp> roles = Collections.emptySet();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<TicketApp> tickets = Collections.emptySet();
 }

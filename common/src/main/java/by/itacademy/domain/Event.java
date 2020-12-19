@@ -1,7 +1,6 @@
 package by.itacademy.domain;
 
 import lombok.Data;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -12,9 +11,9 @@ public class Event {
 
     private Long id;
 
-    private String Date;
+    private String date;
 
-    private String Time;
+    private String time;
 
     private int ticketsCount;
 

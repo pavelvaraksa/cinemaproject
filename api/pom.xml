@@ -10,12 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>api</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>by.itacademy</groupId>
             <artifactId>common</artifactId>
             <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

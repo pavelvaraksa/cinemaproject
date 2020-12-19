@@ -1,11 +1,10 @@
 package by.itacademy.domain.hibernate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Set;
@@ -13,6 +12,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "m_movie")
+@EqualsAndHashCode(exclude = {"cinemas", "events"})
 public class MovieApp {
 
     @Id
@@ -36,4 +36,12 @@ public class MovieApp {
 
     @Column
     private Timestamp changed;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<CinemaApp> cinemas = Collections.emptySet();
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<EventApp> events = Collections.emptySet();
 }

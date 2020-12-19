@@ -1,13 +1,10 @@
 package by.itacademy.domain.hibernate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
-
 import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Set;
 
 @Data
 @Entity
@@ -35,4 +32,14 @@ public class TicketApp {
 
     @Column(name = "event_id")
     private Long eventId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private UserApp user;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private EventApp event;
 }

@@ -1,23 +1,16 @@
 package by.itacademy.controller.hibernate;
 
+import by.itacademy.controller.request.TicketCreateRequest;
 import by.itacademy.controller.request.UserCreateRequest;
-import by.itacademy.controller.request.UserUpdateCreateRequest;
 import by.itacademy.dao.hibernate.UserAppRepository;
 import by.itacademy.domain.SystemRoles;
+import by.itacademy.domain.hibernate.TicketApp;
 import by.itacademy.domain.hibernate.UserApp;
 import by.itacademy.domain.hibernate.UserRoleApp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Collections;
@@ -57,13 +50,12 @@ public class UserAppController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserApp updateUser(@PathVariable Long id,
-                              @RequestBody UserUpdateCreateRequest userUpdateCreateRequest) {
+                              @RequestBody UserCreateRequest userCreateRequest) {
 
         UserApp user = userAppRepository.findById(id);
 
-        user.setLogin(userUpdateCreateRequest.getLogin());
-        user.setPassword(userUpdateCreateRequest.getPassword());
-        user.setRoles(Collections.singleton(new UserRoleApp(SystemRoles.ROLE_MANAGER, user)));
+        user.setLogin(userCreateRequest.getLogin());
+        user.setPassword(userCreateRequest.getPassword());
         user.setChanged(new Timestamp(System.currentTimeMillis()));
         return userAppRepository.update(user);
     }

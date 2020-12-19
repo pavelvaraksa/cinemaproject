@@ -1,19 +1,19 @@
 package by.itacademy.domain.hibernate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "m_event")
+@EqualsAndHashCode(exclude = {"tickets"})
 public class EventApp {
 
     @Id
@@ -40,4 +40,18 @@ public class EventApp {
 
     @Column(name = "cinema_id")
     private Long cinemaId;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<TicketApp> tickets = Collections.emptySet();
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private MovieApp movie;
+
+    @ManyToOne
+    @JoinColumn(name = "cinema_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private CinemaApp cinema;
 }
