@@ -1,6 +1,5 @@
 package by.itacademy;
 
-import by.itacademy.config.JdbcBeanConfig;
 import by.itacademy.config.PersistenceContextBeansConfig;
 import by.itacademy.config.SwaggerBeanConfig;
 import lombok.extern.log4j.Log4j;
@@ -12,8 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Log4j
 @SpringBootApplication(scanBasePackages = "by.itacademy")
 @EnableSwagger2
-@Import({JdbcBeanConfig.class,
-        PersistenceContextBeansConfig.class,
+@Import({PersistenceContextBeansConfig.class,
         SwaggerBeanConfig.class})
 public class CinemaApplicationStarter {
 

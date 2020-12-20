@@ -1,30 +1,49 @@
 package by.itacademy.domain;
 
-import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@Entity
+@Table(name = "m_movie")
+@EqualsAndHashCode(exclude = {"cinemas", "events"})
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String title;
 
+    @Column
     private String genre;
 
+    @Column
     private int year;
 
+    @Column
     private int duration;
 
+    @Column
     private Timestamp created;
 
+    @Column
     private Timestamp changed;
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-    }
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Cinema> cinemas = Collections.emptySet();
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Event> events = Collections.emptySet();
 }

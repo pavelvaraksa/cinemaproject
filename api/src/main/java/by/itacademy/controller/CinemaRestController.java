@@ -1,9 +1,10 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.CinemaCreateRequest;
+import by.itacademy.repository.CinemaRepository;
 import by.itacademy.domain.Cinema;
-import by.itacademy.service.CinemaService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,22 +20,30 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import java.sql.Timestamp;
 import java.util.List;
 
+@Log4j
 @RestController
-@RequestMapping("/rest/cinemas")
+@RequestMapping("/rest/cinemas/hibernate")
 @RequiredArgsConstructor
 public class CinemaRestController {
 
-    private final CinemaService cinemaService;
+    private final CinemaRepository cinemaRepository;
 
     @GetMapping
     public ResponseEntity<List<Cinema>> findAllCinemas() {
-        return new ResponseEntity<>(cinemaService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(cinemaRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Cinema findCinemaById(@PathVariable Long id) {
-        return cinemaService.findById(id);
+        try {
+            Cinema ticket = cinemaRepository.findById(id);
+            log.info("Ok");
+            return ticket;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return null;
     }
 
     @PostMapping
@@ -49,7 +58,8 @@ public class CinemaRestController {
         cinema.setChanged(new Timestamp(System.currentTimeMillis()));
         cinema.setLocationId(cinemaCreateRequest.getLocationId());
         cinema.setMovieId(cinemaCreateRequest.getMovieId());
-        return cinemaService.save(cinema);
+
+        return cinemaRepository.save(cinema);
     }
 
     @PutMapping("/{id}")
@@ -57,7 +67,15 @@ public class CinemaRestController {
     public Cinema updateCinema(@PathVariable Long id,
                                @RequestBody CinemaCreateRequest cinemaCreateRequest) {
 
-        Cinema cinema = cinemaService.findById(id);
+        Cinema cinema;
+        try {
+            cinema = cinemaRepository.findById(id);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+
+        log.info("Ok");
 
         cinema.setName(cinemaCreateRequest.getName());
         cinema.setAddress(cinemaCreateRequest.getAddress());
@@ -66,12 +84,12 @@ public class CinemaRestController {
         cinema.setChanged(new Timestamp(System.currentTimeMillis()));
         cinema.setLocationId(cinemaCreateRequest.getLocationId());
         cinema.setMovieId(cinemaCreateRequest.getMovieId());
-        return cinemaService.update(cinema);
+        return cinemaRepository.update(cinema);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Long deleteCinema(@PathVariable Long id) {
-        return cinemaService.delete(id);
+        return cinemaRepository.delete(id);
     }
 }
