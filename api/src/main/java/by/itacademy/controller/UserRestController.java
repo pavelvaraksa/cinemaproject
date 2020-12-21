@@ -1,12 +1,12 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.UserCreateRequest;
-import by.itacademy.repository.UserRepository;
 import by.itacademy.domain.SystemRoles;
 import by.itacademy.domain.User;
 import by.itacademy.domain.UserRole;
 import by.itacademy.exception.ControllerException;
 import by.itacademy.exception.RepositoryException;
+import by.itacademy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class UserRestController {
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() throws ControllerException {
         try {
-            log.info("Users are exist");
+            log.info("Users exist");
             return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -70,7 +70,7 @@ public class UserRestController {
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public User updateUser(@PathVariable Long userId,
-                           @RequestBody UserCreateRequest userCreateRequest) throws ControllerException, RepositoryException {
+                           @RequestBody UserCreateRequest userCreateRequest) throws RepositoryException, ControllerException {
 
         User userToUpdate;
         try {
@@ -99,4 +99,3 @@ public class UserRestController {
         }
     }
 }
-

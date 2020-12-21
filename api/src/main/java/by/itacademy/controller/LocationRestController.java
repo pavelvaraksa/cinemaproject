@@ -1,6 +1,8 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.LocationCreateRequest;
+import by.itacademy.exception.ControllerException;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.LocationRepository;
 import by.itacademy.domain.Location;
 import lombok.RequiredArgsConstructor;
@@ -22,62 +24,82 @@ import java.util.List;
 
 @Log4j
 @RestController
-@RequestMapping("/rest/locations/hibernate")
+@RequestMapping("/rest/locations")
 @RequiredArgsConstructor
 public class LocationRestController {
 
     private final LocationRepository locationRepository;
 
     @GetMapping
-    public ResponseEntity<List<Location>> findAllLocations() {
-        return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Location>> findAllLocations() throws ControllerException {
+        try {
+            log.info("Locations exist");
+            return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't find not existing locations");
+        }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
-    public Location findLocationById(@PathVariable Long id) {
+    public Location findLocationById(@PathVariable Long locationId) throws ControllerException {
         try {
-            Location location = locationRepository.findById(id);
-            log.info("Ok");
-            return location;
-        } catch (Exception e) {
+            Location locationToFindById = locationRepository.findById(locationId);
+            log.info("Location with id " + locationId + " exists");
+            return locationToFindById;
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
+            throw new ControllerException("Can't find a not existing location");
         }
-        return null;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Location saveLocation(@RequestBody LocationCreateRequest locationCreateRequest) {
-        Location location = new Location();
-        location.setLocation(locationCreateRequest.getLocation());
-        location.setCreated(new Timestamp(System.currentTimeMillis()));
-        location.setChanged(new Timestamp(System.currentTimeMillis()));
+    public Location saveLocation(@RequestBody LocationCreateRequest locationCreateRequest) throws ControllerException {
+        try {
+            Location locationToSave = new Location();
+            locationToSave.setLocation(locationCreateRequest.getLocation());
+            locationToSave.setCreated(new Timestamp(System.currentTimeMillis()));
+            locationToSave.setChanged(new Timestamp(System.currentTimeMillis()));
 
-        return locationRepository.save(location);
+            log.info("Location " + locationToSave + " saved");
+            return locationRepository.save(locationToSave);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't save a not existing location");
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
-    public Location updateLocation(@PathVariable Long id,
-                                   @RequestBody LocationCreateRequest locationCreateRequest) {
+    public Location updateLocation(@PathVariable Long locationId,
+                                   @RequestBody LocationCreateRequest locationCreateRequest) throws RepositoryException, ControllerException {
 
-        Location location;
+        Location locationToUpdate;
+
         try {
-            location = locationRepository.findById(id);
-        } catch (Exception e) {
+            locationToUpdate = locationRepository.findById(locationId);
+            log.info("Location with id " + locationId + " updated");
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
-            return null;
+            throw new ControllerException("Can't update a not existing location");
         }
 
-        location.setLocation(locationCreateRequest.getLocation());
-        location.setChanged(new Timestamp(System.currentTimeMillis()));
-        return locationRepository.update(location);
+        locationToUpdate.setLocation(locationCreateRequest.getLocation());
+        locationToUpdate.setChanged(new Timestamp(System.currentTimeMillis()));
+        return locationRepository.update(locationToUpdate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteLocation(@PathVariable Long id) {
-        return locationRepository.delete(id);
+    public Long deleteLocation(@PathVariable Long locationId) throws ControllerException {
+        try {
+            log.info("Location with id " + locationId + " deleted");
+            return locationRepository.delete(locationId);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't delete a not existing location");
+        }
     }
 }

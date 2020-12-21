@@ -1,6 +1,8 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.EventCreateRequest;
+import by.itacademy.exception.ControllerException;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.EventRepository;
 import by.itacademy.domain.Event;
 import lombok.RequiredArgsConstructor;
@@ -22,70 +24,90 @@ import java.util.List;
 
 @Log4j
 @RestController
-@RequestMapping("/rest/events/hibernate")
+@RequestMapping("/rest/events")
 @RequiredArgsConstructor
 public class EventRestController {
 
     private final EventRepository eventRepository;
 
     @GetMapping
-    public ResponseEntity<List<Event>> findAllEvents() {
-        return new ResponseEntity<>(eventRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Event>> findAllEvents() throws ControllerException {
+        try {
+            log.info("Events exist");
+            return new ResponseEntity<>(eventRepository.findAll(), HttpStatus.OK);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't find not existing events");
+        }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public Event findEventById(@PathVariable Long id) {
+    public Event findEventById(@PathVariable Long eventId) throws ControllerException {
         try {
-            Event event = eventRepository.findById(id);
-            log.info("Ok");
-            return event;
-        } catch (Exception e) {
+            Event eventToFindById = eventRepository.findById(eventId);
+            log.info("Event with id " + eventId + " exists");
+            return eventToFindById;
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
+            throw new ControllerException("Can't find a not existing event");
         }
-        return null;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Event saveEvent(@RequestBody EventCreateRequest eventCreateRequest) {
-        Event event = new Event();
-        event.setDate(eventCreateRequest.getDate());
-        event.setTime(eventCreateRequest.getTime());
-        event.setTicketsCount(eventCreateRequest.getTicketsCount());
-        event.setCreated(new Timestamp(System.currentTimeMillis()));
-        event.setChanged(new Timestamp(System.currentTimeMillis()));
-        event.setMovieId(eventCreateRequest.getMovieId());
-        event.setCinemaId(eventCreateRequest.getCinemaId());
+    public Event saveEvent(@RequestBody EventCreateRequest eventCreateRequest) throws ControllerException {
+        try {
+            Event eventToSave = new Event();
+            eventToSave.setDate(eventCreateRequest.getDate());
+            eventToSave.setTime(eventCreateRequest.getTime());
+            eventToSave.setTicketsCount(eventCreateRequest.getTicketsCount());
+            eventToSave.setCreated(new Timestamp(System.currentTimeMillis()));
+            eventToSave.setChanged(new Timestamp(System.currentTimeMillis()));
+            eventToSave.setMovieId(eventCreateRequest.getMovieId());
+            eventToSave.setCinemaId(eventCreateRequest.getCinemaId());
 
-        return eventRepository.save(event);
+            log.info("Event " + eventToSave + " saved");
+            return eventRepository.save(eventToSave);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't save a not existing event");
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public Event updateEvent(@PathVariable Long id,
-                             @RequestBody EventCreateRequest eventCreateRequest) {
+    public Event updateEvent(@PathVariable Long eventId,
+                             @RequestBody EventCreateRequest eventCreateRequest) throws RepositoryException, ControllerException {
 
-        Event event;
+        Event eventToUpdate;
+
         try {
-            event = eventRepository.findById(id);
-        } catch (Exception e) {
+            eventToUpdate = eventRepository.findById(eventId);
+            log.info("Event with id " + eventId + " updated");
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
-            return null;
+            throw new ControllerException("Can't update a not existing event");
         }
 
-        event.setDate(eventCreateRequest.getDate());
-        event.setTime(eventCreateRequest.getTime());
-        event.setTicketsCount(eventCreateRequest.getTicketsCount());
-        event.setChanged(new Timestamp(System.currentTimeMillis()));
-        event.setMovieId(eventCreateRequest.getMovieId());
-        event.setCinemaId(eventCreateRequest.getCinemaId());
-        return eventRepository.update(event);
+        eventToUpdate.setDate(eventCreateRequest.getDate());
+        eventToUpdate.setTime(eventCreateRequest.getTime());
+        eventToUpdate.setTicketsCount(eventCreateRequest.getTicketsCount());
+        eventToUpdate.setChanged(new Timestamp(System.currentTimeMillis()));
+        eventToUpdate.setMovieId(eventCreateRequest.getMovieId());
+        eventToUpdate.setCinemaId(eventCreateRequest.getCinemaId());
+        return eventRepository.update(eventToUpdate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteEvent(@PathVariable Long id) {
-        return eventRepository.delete(id);
+    public Long deleteEvent(@PathVariable Long eventId) throws ControllerException {
+        try {
+            log.info("Event with id " + eventId + " deleted");
+            return eventRepository.delete(eventId);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't delete a not existing event");
+        }
     }
 }

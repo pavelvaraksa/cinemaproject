@@ -1,6 +1,8 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.MovieCreateRequest;
+import by.itacademy.exception.ControllerException;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.MovieRepository;
 import by.itacademy.domain.Movie;
 import lombok.RequiredArgsConstructor;
@@ -22,68 +24,88 @@ import java.util.List;
 
 @Log4j
 @RestController
-@RequestMapping("/rest/movies/hibernate")
+@RequestMapping("/rest/movies")
 @RequiredArgsConstructor
 public class MovieRestController {
 
     private final MovieRepository movieRepository;
 
     @GetMapping
-    public ResponseEntity<List<Movie>> findAllMovies() {
-        return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Movie>> findAllMovies() throws ControllerException {
+        try {
+            log.info("Movies exist");
+            return new ResponseEntity<>(movieRepository.findAll(), HttpStatus.OK);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't find not existing movies");
+        }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
-    public Movie findMovieById(@PathVariable Long id) {
+    public Movie findMovieById(@PathVariable Long movieId) throws ControllerException {
         try {
-            Movie testUser = movieRepository.findById(id);
-            log.info("Ok");
-            return testUser;
-        } catch (Exception e) {
+            Movie movieToFindById = movieRepository.findById(movieId);
+            log.info("Movie with id " + movieId + " exists");
+            return movieToFindById;
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
+            throw new ControllerException("Can't find a not existing movie");
         }
-        return null;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Movie saveMovie(@RequestBody MovieCreateRequest movieCreateRequest) {
-        Movie movie = new Movie();
-        movie.setTitle(movieCreateRequest.getTitle());
-        movie.setGenre(movieCreateRequest.getGenre());
-        movie.setYear(movieCreateRequest.getYear());
-        movie.setDuration(movieCreateRequest.getDuration());
-        movie.setCreated(new Timestamp(System.currentTimeMillis()));
-        movie.setChanged(new Timestamp(System.currentTimeMillis()));
+    public Movie saveMovie(@RequestBody MovieCreateRequest movieCreateRequest) throws ControllerException {
+        try {
+            Movie movieToSave = new Movie();
+            movieToSave.setTitle(movieCreateRequest.getTitle());
+            movieToSave.setGenre(movieCreateRequest.getGenre());
+            movieToSave.setYear(movieCreateRequest.getYear());
+            movieToSave.setDuration(movieCreateRequest.getDuration());
+            movieToSave.setCreated(new Timestamp(System.currentTimeMillis()));
+            movieToSave.setChanged(new Timestamp(System.currentTimeMillis()));
 
-        return movieRepository.save(movie);
+            log.info("Movie " + movieToSave + " saved");
+            return movieRepository.save(movieToSave);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't save a not existing movie");
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
-    public Movie updateMovie(@PathVariable Long id,
-                             @RequestBody MovieCreateRequest movieCreateRequest) {
+    public Movie updateMovie(@PathVariable Long movieId,
+                             @RequestBody MovieCreateRequest movieCreateRequest) throws RepositoryException, ControllerException {
 
-        Movie movie;
+        Movie movieToUpdate;
+
         try {
-            movie = movieRepository.findById(id);
-        } catch (Exception e) {
+            movieToUpdate = movieRepository.findById(movieId);
+            log.info("Movie with id " + movieId + " updated");
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
-            return null;
+            throw new ControllerException("Can't update a not existing movie");
         }
 
-        movie.setTitle(movieCreateRequest.getTitle());
-        movie.setGenre(movieCreateRequest.getGenre());
-        movie.setYear(movieCreateRequest.getYear());
-        movie.setDuration(movieCreateRequest.getDuration());
-        movie.setChanged(new Timestamp(System.currentTimeMillis()));
-        return movieRepository.update(movie);
+        movieToUpdate.setTitle(movieCreateRequest.getTitle());
+        movieToUpdate.setGenre(movieCreateRequest.getGenre());
+        movieToUpdate.setYear(movieCreateRequest.getYear());
+        movieToUpdate.setDuration(movieCreateRequest.getDuration());
+        movieToUpdate.setChanged(new Timestamp(System.currentTimeMillis()));
+        return movieRepository.update(movieToUpdate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteMovie(@PathVariable Long id) {
-        return movieRepository.delete(id);
+    public Long deleteMovie(@PathVariable Long movieId) throws ControllerException {
+        try {
+            log.info("Movie with id " + movieId + " deleted");
+            return movieRepository.delete(movieId);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't delete a not existing movie");
+        }
     }
 }

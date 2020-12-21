@@ -1,6 +1,8 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.CinemaCreateRequest;
+import by.itacademy.exception.ControllerException;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.CinemaRepository;
 import by.itacademy.domain.Cinema;
 import lombok.RequiredArgsConstructor;
@@ -22,74 +24,92 @@ import java.util.List;
 
 @Log4j
 @RestController
-@RequestMapping("/rest/cinemas/hibernate")
+@RequestMapping("/rest/cinemas")
 @RequiredArgsConstructor
 public class CinemaRestController {
 
     private final CinemaRepository cinemaRepository;
 
     @GetMapping
-    public ResponseEntity<List<Cinema>> findAllCinemas() {
-        return new ResponseEntity<>(cinemaRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Cinema>> findAllCinemas() throws ControllerException {
+        try {
+            log.info("Cinemas exist");
+            return new ResponseEntity<>(cinemaRepository.findAll(), HttpStatus.OK);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't find not existing cinemas");
+        }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{cinemaId}")
     @ResponseStatus(HttpStatus.OK)
-    public Cinema findCinemaById(@PathVariable Long id) {
+    public Cinema findCinemaById(@PathVariable Long cinemaId) throws ControllerException {
         try {
-            Cinema ticket = cinemaRepository.findById(id);
-            log.info("Ok");
-            return ticket;
-        } catch (Exception e) {
+            Cinema cinemaToFindById = cinemaRepository.findById(cinemaId);
+            log.info("Cinema with id " + cinemaId + " exists");
+            return cinemaToFindById;
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
+            throw new ControllerException("Can't find a not existing cinema");
         }
-        return null;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cinema saveCinema(@RequestBody CinemaCreateRequest cinemaCreateRequest) {
-        Cinema cinema = new Cinema();
-        cinema.setName(cinemaCreateRequest.getName());
-        cinema.setAddress(cinemaCreateRequest.getAddress());
-        cinema.setPhoneNumber(cinemaCreateRequest.getPhoneNumber());
-        cinema.setPaymentMethod(cinemaCreateRequest.getPaymentMethod());
-        cinema.setCreated(new Timestamp(System.currentTimeMillis()));
-        cinema.setChanged(new Timestamp(System.currentTimeMillis()));
-        cinema.setLocationId(cinemaCreateRequest.getLocationId());
-        cinema.setMovieId(cinemaCreateRequest.getMovieId());
+    public Cinema saveCinema(@RequestBody CinemaCreateRequest cinemaCreateRequest) throws ControllerException {
+        try {
+            Cinema cinemaToSave = new Cinema();
+            cinemaToSave.setName(cinemaCreateRequest.getName());
+            cinemaToSave.setAddress(cinemaCreateRequest.getAddress());
+            cinemaToSave.setPhoneNumber(cinemaCreateRequest.getPhoneNumber());
+            cinemaToSave.setPaymentMethod(cinemaCreateRequest.getPaymentMethod());
+            cinemaToSave.setCreated(new Timestamp(System.currentTimeMillis()));
+            cinemaToSave.setChanged(new Timestamp(System.currentTimeMillis()));
+            cinemaToSave.setLocationId(cinemaCreateRequest.getLocationId());
+            cinemaToSave.setMovieId(cinemaCreateRequest.getMovieId());
 
-        return cinemaRepository.save(cinema);
+            log.info("Cinema " + cinemaToSave + " saved");
+            return cinemaRepository.save(cinemaToSave);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't save a not existing cinema");
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{cinemaId}")
     @ResponseStatus(HttpStatus.OK)
-    public Cinema updateCinema(@PathVariable Long id,
-                               @RequestBody CinemaCreateRequest cinemaCreateRequest) {
+    public Cinema updateCinema(@PathVariable Long cinemaId,
+                               @RequestBody CinemaCreateRequest cinemaCreateRequest) throws RepositoryException, ControllerException {
 
-        Cinema cinema;
+        Cinema cinemaToUpdate;
+
         try {
-            cinema = cinemaRepository.findById(id);
-        } catch (Exception e) {
+            cinemaToUpdate = cinemaRepository.findById(cinemaId);
+            log.info("Cinema with id " + cinemaId + " updated");
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
-            return null;
+            throw new ControllerException("Can't update a not existing cinema");
         }
 
-        log.info("Ok");
-
-        cinema.setName(cinemaCreateRequest.getName());
-        cinema.setAddress(cinemaCreateRequest.getAddress());
-        cinema.setPhoneNumber(cinemaCreateRequest.getPhoneNumber());
-        cinema.setPaymentMethod(cinemaCreateRequest.getPaymentMethod());
-        cinema.setChanged(new Timestamp(System.currentTimeMillis()));
-        cinema.setLocationId(cinemaCreateRequest.getLocationId());
-        cinema.setMovieId(cinemaCreateRequest.getMovieId());
-        return cinemaRepository.update(cinema);
+        cinemaToUpdate.setName(cinemaCreateRequest.getName());
+        cinemaToUpdate.setAddress(cinemaCreateRequest.getAddress());
+        cinemaToUpdate.setPhoneNumber(cinemaCreateRequest.getPhoneNumber());
+        cinemaToUpdate.setPaymentMethod(cinemaCreateRequest.getPaymentMethod());
+        cinemaToUpdate.setChanged(new Timestamp(System.currentTimeMillis()));
+        cinemaToUpdate.setLocationId(cinemaCreateRequest.getLocationId());
+        cinemaToUpdate.setMovieId(cinemaCreateRequest.getMovieId());
+        return cinemaRepository.update(cinemaToUpdate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{cinemaId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteCinema(@PathVariable Long id) {
-        return cinemaRepository.delete(id);
+    public Long deleteCinema(@PathVariable Long cinemaId) throws ControllerException {
+        try {
+            log.info("Cinema with id " + cinemaId + " deleted");
+            return cinemaRepository.delete(cinemaId);
+        } catch (RepositoryException e) {
+            log.error(e.getMessage());
+            throw new ControllerException("Can't delete a not existing cinema");
+        }
     }
 }

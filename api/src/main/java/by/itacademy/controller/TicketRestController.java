@@ -33,7 +33,7 @@ public class TicketRestController {
     @GetMapping
     public ResponseEntity<List<Ticket>> findAllTickets() throws ControllerException {
         try {
-            log.info("Tickets are exist");
+            log.info("Tickets exist");
             return new ResponseEntity<>(ticketRepository.findAll(), HttpStatus.OK);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -43,7 +43,7 @@ public class TicketRestController {
 
     @GetMapping("/{ticketId}")
     @ResponseStatus(HttpStatus.OK)
-    public Ticket findTicketById(@PathVariable Long ticketId) throws ControllerException {
+    public Ticket findTicketById(@PathVariable Long ticketId) throws ControllerException{
         try {
             Ticket ticketToFindById = ticketRepository.findById(ticketId);
             log.info("Ticket with id " + ticketId + " exists");
@@ -56,7 +56,7 @@ public class TicketRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Ticket saveTicket(@RequestBody TicketCreateRequest ticketCreateRequest) throws ControllerException {
+    public Ticket saveTicket(@RequestBody TicketCreateRequest ticketCreateRequest) throws ControllerException{
         try {
             Ticket ticketToSave = new Ticket();
             ticketToSave.setPlaceNumber(ticketCreateRequest.getPlaceNumber());
@@ -97,7 +97,7 @@ public class TicketRestController {
 
     @DeleteMapping("/{ticketId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteTicket(@PathVariable Long ticketId) throws ControllerException {
+    public Long deleteTicket(@PathVariable Long ticketId) throws ControllerException{
         try {
             log.info("Ticket with id " + ticketId + " deleted");
             return ticketRepository.delete(ticketId);

@@ -1,1 +1,4 @@
-
+2020-12-22 01:55:52 INFO  UserRestController:62 - User by.itacademy.domain.User@be4a6e2a saved
+2020-12-22 01:56:52 INFO  UserRestController:43 - User with id 100 exists
+2020-12-22 01:58:28 INFO  UserRestController:43 - User with id 101 exists
+2020-12-22 02:00:12 INFO  UserRestController:43 - User with id 60 exists
