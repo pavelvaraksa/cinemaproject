@@ -8,3 +8,6 @@
 2020-12-25 12:49:06 INFO  UserRestController:78 - User with id 84 was updated
 2020-12-25 12:53:21 INFO  UserRestController:78 - User with id 84 was updated
 2020-12-25 13:05:28 INFO  UserRestController:78 - User with id 84 was updated
+2020-12-25 13:49:55 INFO  LocationRestController:36 - Locations exist
+2020-12-25 13:53:03 INFO  CinemaRestController:36 - Cinemas exist
+2020-12-25 13:53:20 INFO  CinemaRestController:36 - Cinemas exist
