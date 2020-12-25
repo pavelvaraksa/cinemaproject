@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Event;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.EventRepository;
 import by.itacademy.service.EventService;
 import lombok.extern.log4j.Log4j;
@@ -22,9 +23,9 @@ public class EventServiceImpl implements EventService {
     public List<Event> findAll() {
         try {
             List<Event> eventsToFind = eventRepository.findAll();
-            log.info("Events " + eventsToFind + " are exist");
+            log.info("Events " + eventsToFind + " exist");
             return eventsToFind;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -34,9 +35,9 @@ public class EventServiceImpl implements EventService {
     public Event findById(Long eventId) {
         try {
             Event eventToFindById = eventRepository.findById(eventId);
-            log.info("Event " + eventId + " is exist");
+            log.info("Event with id " + eventId + " exists");
             return eventToFindById;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -46,9 +47,9 @@ public class EventServiceImpl implements EventService {
     public Event save(Event event) {
         try {
             Event eventToSave = eventRepository.save(event);
-            log.info("Event " + event + " saved");
+            log.info("Event " + event + " was saved");
             return eventToSave;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -58,21 +59,21 @@ public class EventServiceImpl implements EventService {
     public Event update(Event event) {
         try {
             Event eventToUpdate = eventRepository.update(event);
-            log.info("Event " + event + " updated");
+            log.info("Event " + event + " was updated");
             return eventToUpdate;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public Long delete(Long eventId) {
+    public Long delete(Event eventId) {
         try {
             Long eventToDelete = eventRepository.delete(eventId);
-            log.info("Event " + eventId + " deleted");
+            log.info("Event with id " + eventId + " was deleted");
             return eventToDelete;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;

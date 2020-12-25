@@ -68,7 +68,7 @@ public class CinemaRestController {
             cinemaToSave.setLocationId(cinemaCreateRequest.getLocationId());
             cinemaToSave.setMovieId(cinemaCreateRequest.getMovieId());
 
-            log.info("Cinema " + cinemaToSave + " saved");
+            log.info("Cinema " + cinemaToSave + " was saved");
             return cinemaRepository.save(cinemaToSave);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -85,7 +85,7 @@ public class CinemaRestController {
 
         try {
             cinemaToUpdate = cinemaRepository.findById(cinemaId);
-            log.info("Cinema with id " + cinemaId + " updated");
+            log.info("Cinema with id " + cinemaId + " was updated");
         } catch (RepositoryException e) {
             log.error(e.getMessage());
             throw new ControllerException("Can't update a not existing cinema");
@@ -103,13 +103,13 @@ public class CinemaRestController {
 
     @DeleteMapping("/{cinemaId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteCinema(@PathVariable Long cinemaId) throws ControllerException {
+    public Long deleteCinema(@PathVariable Cinema cinemaId) throws ControllerException {
         try {
-            log.info("Cinema with id " + cinemaId + " deleted");
+            log.info("User with id " + cinemaId + " was deleted");
             return cinemaRepository.delete(cinemaId);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
-            throw new ControllerException("Can't delete a not existing cinema");
+            throw new ControllerException("Can't delete a not existing user");
         }
     }
 }

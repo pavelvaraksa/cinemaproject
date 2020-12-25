@@ -11,7 +11,11 @@ public class Role {
 
     private Long id;
 
-    private SystemRoles roleName = SystemRoles.ROLE_USER;
+    private SystemRoles roleUser = SystemRoles.ROLE_USER;
+
+    private SystemRoles roleManager = SystemRoles.ROLE_MANAGER;
+
+    private SystemRoles roleAdmin = SystemRoles.ROLE_ADMIN;
 
     private Long userId;
 }

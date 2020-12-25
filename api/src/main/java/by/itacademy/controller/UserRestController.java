@@ -59,7 +59,7 @@ public class UserRestController {
             userToSave.setChanged(new Timestamp(System.currentTimeMillis()));
             userToSave.setRole(new UserRole(SystemRoles.ROLE_USER, userToSave));
 
-            log.info("User " + userToSave + " saved");
+            log.info("User " + userToSave + " was saved");
             return userRepository.save(userToSave);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -75,7 +75,7 @@ public class UserRestController {
         User userToUpdate;
         try {
             userToUpdate = userRepository.findById(userId);
-            log.info("User with id " + userId + " updated");
+            log.info("User with id " + userId + " was updated");
         } catch (RepositoryException e) {
             log.error(e.getMessage());
             throw new ControllerException("Can't update a not existing user");
@@ -89,9 +89,9 @@ public class UserRestController {
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteUser(@PathVariable Long userId) throws ControllerException {
+    public Long deleteUser(@PathVariable User userId) throws ControllerException {
         try {
-            log.info("User with id " + userId + " deleted");
+            log.info("User with id " + userId + " was deleted");
             return userRepository.delete(userId);
         } catch (RepositoryException e) {
             log.error(e.getMessage());

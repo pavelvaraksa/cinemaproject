@@ -1,12 +1,13 @@
 package by.itacademy.service;
 
 import by.itacademy.domain.Cinema;
+import by.itacademy.exception.RepositoryException;
 
 import java.util.List;
 
 public interface CinemaService {
 
-    List<Cinema> findAll();
+    List<Cinema> findAll() throws RepositoryException;
 
     Cinema findById(Long cinemaId);
 
@@ -14,5 +15,5 @@ public interface CinemaService {
 
     Cinema update(Cinema cinema);
 
-    Long delete(Long cinema);
+    Long delete(Cinema cinemaId);
 }

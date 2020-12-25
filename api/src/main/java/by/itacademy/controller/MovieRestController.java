@@ -66,7 +66,7 @@ public class MovieRestController {
             movieToSave.setCreated(new Timestamp(System.currentTimeMillis()));
             movieToSave.setChanged(new Timestamp(System.currentTimeMillis()));
 
-            log.info("Movie " + movieToSave + " saved");
+            log.info("Movie " + movieToSave + " was saved");
             return movieRepository.save(movieToSave);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -83,7 +83,7 @@ public class MovieRestController {
 
         try {
             movieToUpdate = movieRepository.findById(movieId);
-            log.info("Movie with id " + movieId + " updated");
+            log.info("Movie with id " + movieId + " was updated");
         } catch (RepositoryException e) {
             log.error(e.getMessage());
             throw new ControllerException("Can't update a not existing movie");
@@ -99,13 +99,13 @@ public class MovieRestController {
 
     @DeleteMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteMovie(@PathVariable Long movieId) throws ControllerException {
+    public Long deleteMovie(@PathVariable Movie movieId) throws ControllerException {
         try {
-            log.info("Movie with id " + movieId + " deleted");
+            log.info("User with id " + movieId + " was deleted");
             return movieRepository.delete(movieId);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
-            throw new ControllerException("Can't delete a not existing movie");
+            throw new ControllerException("Can't delete a not existing user");
         }
     }
 }

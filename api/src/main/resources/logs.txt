@@ -1,4 +1,10 @@
-2020-12-22 01:55:52 INFO  UserRestController:62 - User by.itacademy.domain.User@be4a6e2a saved
-2020-12-22 01:56:52 INFO  UserRestController:43 - User with id 100 exists
-2020-12-22 01:58:28 INFO  UserRestController:43 - User with id 101 exists
-2020-12-22 02:00:12 INFO  UserRestController:43 - User with id 60 exists
+2020-12-25 03:58:22 INFO  UserRestController:30 - Users exist
+2020-12-25 03:58:31 INFO  UserRestController:62 - User sttntyring was saved
+2020-12-25 03:58:40 INFO  UserRestController:43 - User with id 82 exists
+2020-12-25 03:58:50 INFO  UserRestController:78 - User with id 82 was updated
+2020-12-25 12:43:22 INFO  UserRestController:62 - User strin44g was saved
+2020-12-25 12:44:11 INFO  UserRestController:78 - User with id 84 was updated
+2020-12-25 12:44:26 ERROR UserRestController:80 - User does not exist
+2020-12-25 12:49:06 INFO  UserRestController:78 - User with id 84 was updated
+2020-12-25 12:53:21 INFO  UserRestController:78 - User with id 84 was updated
+2020-12-25 13:05:28 INFO  UserRestController:78 - User with id 84 was updated

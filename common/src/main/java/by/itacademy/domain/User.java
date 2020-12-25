@@ -43,4 +43,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<Ticket> tickets = Collections.emptySet();
+
+    @Override
+    public String toString() {
+        return login;
+    }
 }

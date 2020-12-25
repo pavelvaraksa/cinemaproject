@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Location;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.LocationRepository;
 import by.itacademy.service.LocationService;
 import lombok.extern.log4j.Log4j;
@@ -22,9 +23,9 @@ public class LocationServiceImpl implements LocationService {
     public List<Location> findAll() {
         try {
             List<Location> locationsToFind = locationRepository.findAll();
-            log.info("Locations " + locationsToFind + " are exist");
+            log.info("Locations " + locationsToFind + " exist");
             return locationsToFind;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -34,9 +35,9 @@ public class LocationServiceImpl implements LocationService {
     public Location findById(Long locationId) {
         try {
             Location locationToFindById = locationRepository.findById(locationId);
-            log.info("Location " + locationId + " is exist");
+            log.info("Location with id " + locationId + " exists");
             return locationToFindById;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -46,9 +47,9 @@ public class LocationServiceImpl implements LocationService {
     public Location save(Location location) {
         try {
             Location locationToSave = locationRepository.save(location);
-            log.info("Location " + location + " saved");
+            log.info("Location " + location + " was saved");
             return locationToSave;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -58,21 +59,21 @@ public class LocationServiceImpl implements LocationService {
     public Location update(Location location) {
         try {
             Location locationToUpdate = locationRepository.update(location);
-            log.info("Location " + location + " updated");
+            log.info("Location " + location + " was updated");
             return locationToUpdate;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public Long delete(Long locationId) {
+    public Long delete(Location locationId) {
         try {
             Long locationToDelete = locationRepository.delete(locationId);
-            log.info("Location " + locationId + " deleted");
+            log.info("Location with id " + locationId + " was deleted");
             return locationToDelete;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;

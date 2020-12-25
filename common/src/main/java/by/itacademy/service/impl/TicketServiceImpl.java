@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Ticket;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.TicketRepository;
 import by.itacademy.service.TicketService;
 import lombok.extern.log4j.Log4j;
@@ -22,9 +23,9 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> findAll() {
         try {
             List<Ticket> ticketsToFind = ticketRepository.findAll();
-            log.info("Tickets " + ticketsToFind + " are exist");
+            log.info("Tickets " + ticketsToFind + " exist");
             return ticketsToFind;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -34,9 +35,9 @@ public class TicketServiceImpl implements TicketService {
     public Ticket findById(Long ticketId) {
         try {
             Ticket ticketToFindById = ticketRepository.findById(ticketId);
-            log.info("Ticket " + ticketId + " is exist");
+            log.info("Ticket with id " + ticketId + " exists");
             return ticketToFindById;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -46,9 +47,9 @@ public class TicketServiceImpl implements TicketService {
     public Ticket save(Ticket ticket) {
         try {
             Ticket ticketToSave = ticketRepository.save(ticket);
-            log.info("Ticket " + ticket + " saved");
+            log.info("Ticket " + ticket + " was saved");
             return ticketToSave;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -58,21 +59,21 @@ public class TicketServiceImpl implements TicketService {
     public Ticket update(Ticket ticket) {
         try {
             Ticket ticketToUpdate = ticketRepository.update(ticket);
-            log.info("Ticket " + ticket + " updated");
+            log.info("Ticket " + ticket + " was updated");
             return ticketToUpdate;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public Long delete(Long ticketId) {
+    public Long delete(Ticket ticketId) {
         try {
             Long ticketToDelete = ticketRepository.delete(ticketId);
-            log.info("Ticket " + ticketId + " deleted");
+            log.info("Ticket with id " + ticketId + " was deleted");
             return ticketToDelete;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;

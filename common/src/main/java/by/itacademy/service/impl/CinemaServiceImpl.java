@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Cinema;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.CinemaRepository;
 import by.itacademy.service.CinemaService;
 import lombok.extern.log4j.Log4j;
@@ -19,12 +20,12 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public List<Cinema> findAll() {
+    public List<Cinema> findAll()  {
         try {
             List<Cinema> cinemasToFind = cinemaRepository.findAll();
-            log.info("Cinemas " + cinemasToFind + " are exist");
+            log.info("Cinemas " + cinemasToFind + " exist");
             return cinemasToFind;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -34,9 +35,9 @@ public class CinemaServiceImpl implements CinemaService {
     public Cinema findById(Long cinemaId) {
         try {
             Cinema cinemaToFindById = cinemaRepository.findById(cinemaId);
-            log.info("Cinema " + cinemaId + " is exist");
+            log.info("Cinema with id " + cinemaId + " exists");
             return cinemaToFindById;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -46,9 +47,9 @@ public class CinemaServiceImpl implements CinemaService {
     public Cinema save(Cinema cinema) {
         try {
             Cinema cinemaToSave = cinemaRepository.save(cinema);
-            log.info("Cinema " + cinema + " saved");
+            log.info("Cinema " + cinema + " was saved");
             return cinemaToSave;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -58,21 +59,21 @@ public class CinemaServiceImpl implements CinemaService {
     public Cinema update(Cinema cinema) {
         try {
             Cinema cinemaToUpdate = cinemaRepository.update(cinema);
-            log.info("Cinema " + cinema + " updated");
+            log.info("Cinema " + cinema + " was updated");
             return cinemaToUpdate;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public Long delete(Long cinemaId) {
+    public Long delete(Cinema cinemaId) {
         try {
             Long cinemaToDelete = cinemaRepository.delete(cinemaId);
-            log.info("Cinema " + cinemaId + " deleted");
+            log.info("Cinema with id " + cinemaId + " was deleted");
             return cinemaToDelete;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;

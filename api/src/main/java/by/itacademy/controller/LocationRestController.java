@@ -63,7 +63,7 @@ public class LocationRestController {
             locationToSave.setCreated(new Timestamp(System.currentTimeMillis()));
             locationToSave.setChanged(new Timestamp(System.currentTimeMillis()));
 
-            log.info("Location " + locationToSave + " saved");
+            log.info("Location " + locationToSave + " was saved");
             return locationRepository.save(locationToSave);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -80,7 +80,7 @@ public class LocationRestController {
 
         try {
             locationToUpdate = locationRepository.findById(locationId);
-            log.info("Location with id " + locationId + " updated");
+            log.info("Location with id " + locationId + " was updated");
         } catch (RepositoryException e) {
             log.error(e.getMessage());
             throw new ControllerException("Can't update a not existing location");
@@ -93,13 +93,13 @@ public class LocationRestController {
 
     @DeleteMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteLocation(@PathVariable Long locationId) throws ControllerException {
+    public Long deleteLocation(@PathVariable Location locationId) throws ControllerException {
         try {
-            log.info("Location with id " + locationId + " deleted");
+            log.info("User with id " + locationId + " was deleted");
             return locationRepository.delete(locationId);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
-            throw new ControllerException("Can't delete a not existing location");
+            throw new ControllerException("Can't delete a not existing user");
         }
     }
 }

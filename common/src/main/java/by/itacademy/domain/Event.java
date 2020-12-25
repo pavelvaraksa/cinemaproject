@@ -56,4 +56,9 @@ public class Event {
     @JoinColumn(name = "cinema_id", insertable = false, updatable = false)
     @JsonBackReference
     private Cinema cinema;
+
+    @Override
+    public String toString() {
+        return "with movie_id " + movieId + " and cinema_id " + cinemaId;
+    }
 }

@@ -66,7 +66,7 @@ public class TicketRestController {
             ticketToSave.setUserId(ticketCreateRequest.getUserId());
             ticketToSave.setEventId(ticketCreateRequest.getEventId());
 
-            log.info("Ticket " + ticketToSave + " saved");
+            log.info("Ticket " + ticketToSave + " was saved");
             return ticketRepository.save(ticketToSave);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -81,7 +81,7 @@ public class TicketRestController {
         Ticket ticketToUpdate;
         try {
             ticketToUpdate = ticketRepository.findById(ticketId);
-            log.info("Ticket with id " + ticketId + " updated");
+            log.info("Ticket with id " + ticketId + " was updated");
         } catch (RepositoryException e) {
             log.error(e.getMessage());
             throw new ControllerException("Can't update a not existing ticket");
@@ -97,13 +97,13 @@ public class TicketRestController {
 
     @DeleteMapping("/{ticketId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteTicket(@PathVariable Long ticketId) throws ControllerException{
+    public Long deleteTicket(@PathVariable Ticket ticketId) throws ControllerException{
         try {
-            log.info("Ticket with id " + ticketId + " deleted");
+            log.info("User with id " + ticketId + " was deleted");
             return ticketRepository.delete(ticketId);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
-            throw new ControllerException("Can't delete a not existing ticket");
+            throw new ControllerException("Can't delete a not existing user");
         }
     }
 }

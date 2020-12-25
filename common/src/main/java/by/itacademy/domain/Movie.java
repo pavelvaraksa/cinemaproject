@@ -46,4 +46,9 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<Event> events = Collections.emptySet();
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

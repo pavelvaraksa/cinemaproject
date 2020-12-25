@@ -60,5 +60,10 @@ public class Cinema {
     @JsonBackReference
     private Movie movie;
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }
 

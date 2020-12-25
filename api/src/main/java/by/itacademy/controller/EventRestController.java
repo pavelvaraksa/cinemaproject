@@ -67,7 +67,7 @@ public class EventRestController {
             eventToSave.setMovieId(eventCreateRequest.getMovieId());
             eventToSave.setCinemaId(eventCreateRequest.getCinemaId());
 
-            log.info("Event " + eventToSave + " saved");
+            log.info("Event " + eventToSave + " was saved");
             return eventRepository.save(eventToSave);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
@@ -84,7 +84,7 @@ public class EventRestController {
 
         try {
             eventToUpdate = eventRepository.findById(eventId);
-            log.info("Event with id " + eventId + " updated");
+            log.info("Event with id " + eventId + " was updated");
         } catch (RepositoryException e) {
             log.error(e.getMessage());
             throw new ControllerException("Can't update a not existing event");
@@ -101,13 +101,13 @@ public class EventRestController {
 
     @DeleteMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteEvent(@PathVariable Long eventId) throws ControllerException {
+    public Long deleteEvent(@PathVariable Event eventId) throws ControllerException {
         try {
-            log.info("Event with id " + eventId + " deleted");
+            log.info("User with id " + eventId + " was deleted");
             return eventRepository.delete(eventId);
         } catch (RepositoryException e) {
             log.error(e.getMessage());
-            throw new ControllerException("Can't delete a not existing event");
+            throw new ControllerException("Can't delete a not existing user");
         }
     }
 }

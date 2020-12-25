@@ -33,4 +33,9 @@ public class Location {
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<Cinema> cinemas = Collections.emptySet();
+
+    @Override
+    public String toString() {
+        return location;
+    }
 }

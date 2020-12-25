@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.User;
+import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.UserRepository;
 import by.itacademy.service.UserService;
 import lombok.extern.log4j.Log4j;
@@ -22,9 +23,11 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         try {
             List<User> usersToFind = userRepository.findAll();
-            log.info("Users " + usersToFind + " are exist");
-            return usersToFind;
-        } catch (Exception e) {
+            if (usersToFind != null) {
+                log.info("Users " + usersToFind + " exist");
+                return usersToFind;
+            }
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -34,9 +37,11 @@ public class UserServiceImpl implements UserService {
     public User findById(Long userId) {
         try {
             User userToFindById = userRepository.findById(userId);
-            log.info("User " + userId + " is exist");
-            return userToFindById;
-        } catch (Exception e) {
+            if (userToFindById != null) {
+                log.info("User with id " + userId + " exists");
+                return userToFindById;
+            }
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -46,9 +51,9 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         try {
             User userToSave = userRepository.save(user);
-            log.info("User " + user + " saved");
+            log.info("User " + user + " was saved");
             return userToSave;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
@@ -58,21 +63,21 @@ public class UserServiceImpl implements UserService {
     public User update(User user) {
         try {
             User userToUpdate = userRepository.update(user);
-            log.info("User " + user + " updated");
+            log.info("User " + user + " was updated");
             return userToUpdate;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public Long delete(Long userId) {
+    public Long delete(User userId) {
         try {
             Long userToDelete = userRepository.delete(userId);
-            log.info("User " + userId + " deleted");
+            log.info("User with id " + userId + " was deleted");
             return userToDelete;
-        } catch (Exception e) {
+        } catch (RepositoryException e) {
             log.error(e.getMessage());
         }
         return null;

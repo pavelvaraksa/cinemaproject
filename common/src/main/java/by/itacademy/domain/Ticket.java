@@ -45,4 +45,9 @@ public class Ticket {
     @JoinColumn(name = "event_id", insertable = false, updatable = false)
     @JsonBackReference
     private Event event;
+
+    @Override
+    public String toString() {
+        return "with user_id " + userId + " and event_id " + eventId;
+    }
 }
