@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Location;
+import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.LocationRepository;
 import by.itacademy.service.LocationService;
@@ -68,9 +69,9 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Long delete(Location locationId) {
+    public Location delete(Long locationId) {
         try {
-            Long locationToDelete = locationRepository.delete(locationId);
+            Location locationToDelete = locationRepository.delete(locationId);
             log.info("Location with id " + locationId + " was deleted");
             return locationToDelete;
         } catch (RepositoryException e) {

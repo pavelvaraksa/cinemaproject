@@ -1,9 +1,7 @@
 package by.itacademy.repository.impl;
 
-import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.LocationRepository;
 import by.itacademy.domain.Location;
-import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +12,6 @@ import java.util.List;
 
 @Repository
 @Primary
-@Log4j
 public class LocationRepositoryImpl implements LocationRepository {
 
     private final SessionFactory sessionFactory;
@@ -24,65 +21,48 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
     @Override
-    public List<Location> findAll() throws RepositoryException {
+    public List<Location> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            if (session != null) {
-                String hqlQuery = "select u from Location u";
-                return session.createQuery(hqlQuery, Location.class).list();
-            } else {
-                throw new RepositoryException("No one location does not exist");
-            }
+            String hqlQuery = "select u from Location u";
+            return session.createQuery(hqlQuery, Location.class).list();
         }
     }
 
     @Override
-    public Location findById(Long locationId) throws RepositoryException {
+    public Location findById(Long locationId) {
         try (Session session = sessionFactory.openSession()) {
-            Location locationToFindById = session.find(Location.class, locationId);
-            if (locationToFindById != null) {
-                return locationToFindById;
-            } else {
-                throw new RepositoryException("Location does not exist");
-            }
+            return session.find(Location.class, locationId);
         }
     }
 
     @Override
-    public Location save(Location location) throws RepositoryException {
+    public Location save(Location location) {
         try (Session session = sessionFactory.openSession()) {
             session.save(location);
-            if (location != null) {
-                return location;
-            } else {
-                throw new RepositoryException("Location does not save");
-            }
+            return location;
         }
     }
 
     @Override
-    public Location update(Location locationId) throws RepositoryException {
+    public Location update(Location locationId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.update(locationId);
             transaction.commit();
-            if (locationId != null) {
-                return locationId;
-            } else {
-                throw new RepositoryException("Location does not update");
-            }
+            return locationId;
         }
     }
 
     @Override
-    public Long delete(Location locationId) throws RepositoryException {
+    public Location delete(Long locationId) {
         try (Session session = sessionFactory.openSession()) {
-            session.delete(locationId);
-            if (locationId != null) {
-                return locationId.getId();
-            } else {
-                throw new RepositoryException("Location does not delete");
-            }
+            Location locationDeleteById = session.find(Location.class, locationId);
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
+            session.delete(locationDeleteById);
+            transaction.commit();
+            return locationDeleteById;
         }
     }
 }

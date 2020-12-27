@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_location")
-@EqualsAndHashCode(exclude = {"cinemas"})
+//@EqualsAndHashCode(exclude = {"cinemas"})
 public class Location {
 
     @Id
@@ -30,9 +30,9 @@ public class Location {
     @Column
     private Timestamp changed;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Cinema> cinemas = Collections.emptySet();
+//    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Cinema> cinemas = Collections.emptySet();
 
     @Override
     public String toString() {

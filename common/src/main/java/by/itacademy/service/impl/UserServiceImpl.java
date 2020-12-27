@@ -2,6 +2,7 @@ package by.itacademy.service.impl;
 
 import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
+import by.itacademy.exception.ServiceException;
 import by.itacademy.repository.UserRepository;
 import by.itacademy.service.UserService;
 import lombok.extern.log4j.Log4j;
@@ -20,66 +21,111 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAll() throws ServiceException {
+        List<User> existingUsers;
         try {
-            List<User> usersToFind = userRepository.findAll();
-            if (usersToFind != null) {
-                log.info("Users " + usersToFind + " exist");
-                return usersToFind;
+            existingUsers = userRepository.findAll();
+            if (existingUsers.isEmpty()) {
+                String errorMessage = "The list is empty.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            } else {
+                log.info("Users exist.");
+                return existingUsers;
             }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("User service exception while trying to find all users." + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public User findById(Long userId) {
+    public User findById(Long userId) throws ServiceException {
+        User userToFindById;
+
         try {
-            User userToFindById = userRepository.findById(userId);
-            if (userToFindById != null) {
-                log.info("User with id " + userId + " exists");
-                return userToFindById;
+            userToFindById = userRepository.findById(userId);
+            if (userToFindById == null) {
+                String errorMessage = "User id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
             }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("User service exception while trying to find an user." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("User with id " + userId + " exists.");
+            return userRepository.findById(userId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find an user.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws ServiceException {
+        List<User> existingUsers;
         try {
-            User userToSave = userRepository.save(user);
+            existingUsers = userRepository.findAll();
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't get all users.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
+
+        for (User existingUser : existingUsers) {
+            boolean hasSameUser = existingUser.getLogin().equals(user.getLogin());
+
+            if (hasSameUser) {
+                String errorMessage = "User with login " + user.getLogin() + " already exists.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
+        }
+
+        try {
+            User savedUser = userRepository.save(user);
             log.info("User " + user + " was saved");
-            return userToSave;
+            return savedUser;
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("User service exception while trying to save user:" + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user) throws ServiceException {
         try {
-            User userToUpdate = userRepository.update(user);
-            log.info("User " + user + " was updated");
-            return userToUpdate;
+            return userRepository.update(user);
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            String errorMessage = "Can't get an user.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
         }
-        return null;
     }
 
     @Override
-    public Long delete(User userId) {
+    public User delete(Long userId) throws ServiceException {
+        User userToFindById;
+
         try {
-            Long userToDelete = userRepository.delete(userId);
-            log.info("User with id " + userId + " was deleted");
-            return userToDelete;
+            userToFindById = userRepository.findById(userId);
+            if (userToFindById == null) {
+                String errorMessage = "User id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("User service exception while trying to delete an user." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("User with id " + userId + " was deleted.");
+            return userRepository.delete(userId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find an user.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 }

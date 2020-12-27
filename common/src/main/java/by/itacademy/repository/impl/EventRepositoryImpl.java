@@ -1,9 +1,7 @@
 package by.itacademy.repository.impl;
 
-import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.EventRepository;
 import by.itacademy.domain.Event;
-import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +12,6 @@ import java.util.List;
 
 @Repository
 @Primary
-@Log4j
 public class EventRepositoryImpl implements EventRepository {
 
     private final SessionFactory sessionFactory;
@@ -24,65 +21,48 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public List<Event> findAll() throws RepositoryException {
+    public List<Event> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            if (session != null) {
-                String hqlQuery = "select u from Event u";
-                return session.createQuery(hqlQuery, Event.class).list();
-            } else {
-                throw new RepositoryException("No one event does not exist");
-            }
+            String hqlQuery = "select u from Event u";
+            return session.createQuery(hqlQuery, Event.class).list();
         }
     }
 
     @Override
-    public Event findById(Long eventId) throws RepositoryException {
+    public Event findById(Long eventId) {
         try (Session session = sessionFactory.openSession()) {
-            Event eventToFindById = session.find(Event.class, eventId);
-            if (eventToFindById != null) {
-                return eventToFindById;
-            } else {
-                throw new RepositoryException("Event does not exist");
-            }
+            return session.find(Event.class, eventId);
         }
     }
 
     @Override
-    public Event save(Event event) throws RepositoryException {
+    public Event save(Event event) {
         try (Session session = sessionFactory.openSession()) {
             session.save(event);
-            if (event != null) {
-                return event;
-            } else {
-                throw new RepositoryException("Event does not save");
-            }
+            return event;
         }
     }
 
     @Override
-    public Event update(Event eventId) throws RepositoryException {
+    public Event update(Event eventId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.update(eventId);
             transaction.commit();
-            if (eventId != null) {
-                return eventId;
-            } else {
-                throw new RepositoryException("Event does not update");
-            }
+            return eventId;
         }
     }
 
     @Override
-    public Long delete(Event eventId) throws RepositoryException {
+    public Event delete(Long eventId) {
         try (Session session = sessionFactory.openSession()) {
-            session.delete(eventId);
-            if (eventId != null) {
-                return eventId.getId();
-            } else {
-                throw new RepositoryException("Event does not delete");
-            }
+            Event eventDeleteById = session.find(Event.class, eventId);
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
+            session.delete(eventDeleteById);
+            transaction.commit();
+            return eventDeleteById;
         }
     }
 }

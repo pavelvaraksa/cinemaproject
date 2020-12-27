@@ -1,9 +1,7 @@
 package by.itacademy.repository.impl;
 
-import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.MovieRepository;
 import by.itacademy.domain.Movie;
-import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +12,6 @@ import java.util.List;
 
 @Repository
 @Primary
-@Log4j
 public class MovieRepositoryImpl implements MovieRepository {
 
     private final SessionFactory sessionFactory;
@@ -24,65 +21,48 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public List<Movie> findAll() throws RepositoryException {
+    public List<Movie> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            if (session != null) {
-                String hqlQuery = "select u from Movie u";
-                return session.createQuery(hqlQuery, Movie.class).list();
-            } else {
-                throw new RepositoryException("No one movie does not exist");
-            }
+            String hqlQuery = "select u from Movie u";
+            return session.createQuery(hqlQuery, Movie.class).list();
         }
     }
 
     @Override
-    public Movie findById(Long movieId) throws RepositoryException {
+    public Movie findById(Long movieId) {
         try (Session session = sessionFactory.openSession()) {
-            Movie movieToFindById = session.find(Movie.class, movieId);
-            if (movieToFindById != null) {
-                return movieToFindById;
-            } else {
-                throw new RepositoryException("Movie does not exist");
-            }
+            return session.find(Movie.class, movieId);
         }
     }
 
     @Override
-    public Movie save(Movie movie) throws RepositoryException {
+    public Movie save(Movie movie) {
         try (Session session = sessionFactory.openSession()) {
             session.save(movie);
-            if (movie != null) {
-                return movie;
-            } else {
-                throw new RepositoryException("Movie does not save");
-            }
+            return movie;
         }
     }
 
     @Override
-    public Movie update(Movie movieId) throws RepositoryException {
+    public Movie update(Movie movieId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.update(movieId);
             transaction.commit();
-            if (movieId != null) {
-                return movieId;
-            } else {
-                throw new RepositoryException("Movie does not update");
-            }
+            return movieId;
         }
     }
 
     @Override
-    public Long delete(Movie movieId) throws RepositoryException {
+    public Movie delete(Long movieId) {
         try (Session session = sessionFactory.openSession()) {
-            session.delete(movieId);
-            if (movieId != null) {
-                return movieId.getId();
-            } else {
-                throw new RepositoryException("Movie does not delete");
-            }
+            Movie movieDeleteById = session.find(Movie.class, movieId);
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
+            session.delete(movieDeleteById);
+            transaction.commit();
+            return movieDeleteById;
         }
     }
 }

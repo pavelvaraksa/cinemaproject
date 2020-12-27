@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Movie;
+import by.itacademy.domain.Movie;
 import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.MovieRepository;
 import by.itacademy.service.MovieService;
@@ -68,9 +69,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Long delete(Movie movieId) {
+    public Movie delete(Long movieId) {
         try {
-            Long movieToDelete = movieRepository.delete(movieId);
+            Movie movieToDelete = movieRepository.delete(movieId);
             log.info("Movie with id " + movieId + " was deleted");
             return movieToDelete;
         } catch (RepositoryException e) {

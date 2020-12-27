@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Event;
+import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.EventRepository;
 import by.itacademy.service.EventService;
@@ -68,9 +69,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Long delete(Event eventId) {
+    public Event delete(Long eventId) {
         try {
-            Long eventToDelete = eventRepository.delete(eventId);
+            Event eventToDelete = eventRepository.delete(eventId);
             log.info("Event with id " + eventId + " was deleted");
             return eventToDelete;
         } catch (RepositoryException e) {

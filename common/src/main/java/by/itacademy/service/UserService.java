@@ -1,18 +1,19 @@
 package by.itacademy.service;
 
 import by.itacademy.domain.User;
+import by.itacademy.exception.ServiceException;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<User> findAll() throws ServiceException;
 
-    User findById(Long userId);
+    User findById(Long userId) throws ServiceException;
 
-    User save(User user);
+    User save(User user) throws ServiceException;
 
-    User update(User user);
+    User update(User user) throws ServiceException;
 
-    Long delete(User userId);
+    User delete(Long userId) throws ServiceException;
 }

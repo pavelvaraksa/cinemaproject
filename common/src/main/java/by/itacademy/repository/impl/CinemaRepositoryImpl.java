@@ -1,9 +1,7 @@
 package by.itacademy.repository.impl;
 
-import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.CinemaRepository;
 import by.itacademy.domain.Cinema;
-import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,7 +12,6 @@ import java.util.List;
 
 @Repository
 @Primary
-@Log4j
 public class CinemaRepositoryImpl implements CinemaRepository {
 
     private final SessionFactory sessionFactory;
@@ -24,65 +21,48 @@ public class CinemaRepositoryImpl implements CinemaRepository {
     }
 
     @Override
-    public List<Cinema> findAll() throws RepositoryException {
+    public List<Cinema> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            if (session != null) {
-                String hqlQuery = "select u from Cinema u";
-                return session.createQuery(hqlQuery, Cinema.class).list();
-            } else {
-                throw new RepositoryException("No one cinema does not exist");
-            }
+            String hqlQuery = "select u from Cinema u";
+            return session.createQuery(hqlQuery, Cinema.class).list();
         }
     }
 
     @Override
-    public Cinema findById(Long cinemaId) throws RepositoryException {
+    public Cinema findById(Long cinemaId) {
         try (Session session = sessionFactory.openSession()) {
-            Cinema cinemaToFindById = session.find(Cinema.class, cinemaId);
-            if (cinemaToFindById != null) {
-                return cinemaToFindById;
-            } else {
-                throw new RepositoryException("Cinema does not exist");
-            }
+            return session.find(Cinema.class, cinemaId);
         }
     }
 
     @Override
-    public Cinema save(Cinema cinema) throws RepositoryException {
+    public Cinema save(Cinema cinema) {
         try (Session session = sessionFactory.openSession()) {
             session.save(cinema);
-            if (cinema != null) {
-                return cinema;
-            } else {
-                throw new RepositoryException("Cinema does not save");
-            }
+            return cinema;
         }
     }
 
     @Override
-    public Cinema update(Cinema cinemaId) throws RepositoryException {
+    public Cinema update(Cinema cinemaId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.update(cinemaId);
             transaction.commit();
-            if (cinemaId != null) {
-                return cinemaId;
-            } else {
-                throw new RepositoryException("Cinema does not update");
-            }
+            return cinemaId;
         }
     }
 
     @Override
-    public Long delete(Cinema cinemaId) throws RepositoryException {
+    public Cinema delete(Long cinemaId) {
         try (Session session = sessionFactory.openSession()) {
-            session.delete(cinemaId);
-            if (cinemaId != null) {
-                return cinemaId.getId();
-            } else {
-                throw new RepositoryException("Cinema does not delete");
-            }
+            Cinema cinemaDeleteById = session.find(Cinema.class, cinemaId);
+            Transaction transaction = session.getTransaction();
+            transaction.begin();
+            session.delete(cinemaDeleteById);
+            transaction.commit();
+            return cinemaDeleteById;
         }
     }
 }

@@ -2,13 +2,12 @@ package by.itacademy.controller;
 
 import by.itacademy.controller.request.LocationCreateRequest;
 import by.itacademy.exception.ControllerException;
-import by.itacademy.exception.RepositoryException;
-import by.itacademy.repository.LocationRepository;
+import by.itacademy.exception.ServiceException;
 import by.itacademy.domain.Location;
+import by.itacademy.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +27,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LocationRestController {
 
-    private final LocationRepository locationRepository;
+    private final LocationService locationService;
 
     @GetMapping
-    public ResponseEntity<List<Location>> findAllLocations() throws ControllerException {
+    @ResponseStatus(HttpStatus.OK)
+    public List<Location> findAllLocations() throws ControllerException {
         try {
-            log.info("Locations exist");
-            return new ResponseEntity<>(locationRepository.findAll(), HttpStatus.OK);
-        } catch (RepositoryException e) {
-            log.error(e.getMessage());
-            throw new ControllerException("Can't find not existing locations");
+            return locationService.findAll();
+        } catch (ServiceException e) {
+            log.error("Can't find any locations.");
+            throw new ControllerException("Can't find any locations." + e.getMessage());
         }
     }
 
@@ -45,61 +44,64 @@ public class LocationRestController {
     @ResponseStatus(HttpStatus.OK)
     public Location findLocationById(@PathVariable Long locationId) throws ControllerException {
         try {
-            Location locationToFindById = locationRepository.findById(locationId);
-            log.info("Location with id " + locationId + " exists");
-            return locationToFindById;
-        } catch (RepositoryException e) {
-            log.error(e.getMessage());
-            throw new ControllerException("Can't find a not existing location");
+            return locationService.findById(locationId);
+        } catch (ServiceException e) {
+            log.error("Can't find a location.");
+            throw new ControllerException("Can't find a location." + e.getMessage());
         }
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Location saveLocation(@RequestBody LocationCreateRequest locationCreateRequest) throws ControllerException {
-        try {
-            Location locationToSave = new Location();
-            locationToSave.setLocation(locationCreateRequest.getLocation());
-            locationToSave.setCreated(new Timestamp(System.currentTimeMillis()));
-            locationToSave.setChanged(new Timestamp(System.currentTimeMillis()));
+        String location = locationCreateRequest.getLocation();
 
-            log.info("Location " + locationToSave + " was saved");
-            return locationRepository.save(locationToSave);
-        } catch (RepositoryException e) {
-            log.error(e.getMessage());
-            throw new ControllerException("Can't save a not existing location");
+        if (location == null || location.isEmpty()) {
+            throw new ControllerException("Location can't be null or empty.");
+        }
+
+        Location locationToSave = new Location();
+        locationToSave.setLocation(locationCreateRequest.getLocation());
+        locationToSave.setCreated(new Timestamp(System.currentTimeMillis()));
+        locationToSave.setChanged(new Timestamp(System.currentTimeMillis()));
+
+        try {
+            return locationService.save(locationToSave);
+        } catch (ServiceException e) {
+            log.error("Can't save a location.");
+            throw new ControllerException("Can't save a location." + e.getMessage());
         }
     }
 
     @PutMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
     public Location updateLocation(@PathVariable Long locationId,
-                                   @RequestBody LocationCreateRequest locationCreateRequest) throws RepositoryException, ControllerException {
+                                   @RequestBody LocationCreateRequest locationCreateRequest) throws ControllerException {
+        String location = locationCreateRequest.getLocation();
 
-        Location locationToUpdate;
-
-        try {
-            locationToUpdate = locationRepository.findById(locationId);
-            log.info("Location with id " + locationId + " was updated");
-        } catch (RepositoryException e) {
-            log.error(e.getMessage());
-            throw new ControllerException("Can't update a not existing location");
+        if (location == null || location.isEmpty()) {
+            throw new ControllerException("Location can't be null or empty.");
         }
 
-        locationToUpdate.setLocation(locationCreateRequest.getLocation());
-        locationToUpdate.setChanged(new Timestamp(System.currentTimeMillis()));
-        return locationRepository.update(locationToUpdate);
+        try {
+            Location foundLocation = locationService.findById(locationId);
+            foundLocation.setLocation(locationCreateRequest.getLocation());
+            foundLocation.setChanged(new Timestamp(System.currentTimeMillis()));
+            return locationService.update(foundLocation);
+        } catch (ServiceException e) {
+            log.error("Can't find a location.");
+            throw new ControllerException("Can't find a location." + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
-    public Long deleteLocation(@PathVariable Location locationId) throws ControllerException {
+    public Location deleteLocation(@PathVariable Long locationId) throws ControllerException {
         try {
-            log.info("User with id " + locationId + " was deleted");
-            return locationRepository.delete(locationId);
-        } catch (RepositoryException e) {
-            log.error(e.getMessage());
-            throw new ControllerException("Can't delete a not existing user");
+            return locationService.delete(locationId);
+        } catch (ServiceException e) {
+            log.error("Can't find a location.");
+            throw new ControllerException("Can't find a location." + e.getMessage());
         }
     }
 }

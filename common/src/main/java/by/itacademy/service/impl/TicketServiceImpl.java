@@ -1,6 +1,7 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Ticket;
+import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
 import by.itacademy.repository.TicketRepository;
 import by.itacademy.service.TicketService;
@@ -68,9 +69,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Long delete(Ticket ticketId) {
+    public Ticket delete(Long ticketId) {
         try {
-            Long ticketToDelete = ticketRepository.delete(ticketId);
+            Ticket ticketToDelete = ticketRepository.delete(ticketId);
             log.info("Ticket with id " + ticketId + " was deleted");
             return ticketToDelete;
         } catch (RepositoryException e) {

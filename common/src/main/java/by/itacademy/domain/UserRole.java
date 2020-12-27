@@ -1,7 +1,7 @@
 package by.itacademy.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,9 +23,8 @@ public class UserRole {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    //@JsonBackReference
-    @JsonManagedReference
-    @JsonIgnore
+    @JsonBackReference
+    //@JsonIgnore
     private User user;
 
     public UserRole() {

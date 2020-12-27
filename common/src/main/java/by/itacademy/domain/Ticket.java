@@ -36,15 +36,15 @@ public class Ticket {
     @Column(name = "event_id")
     private Long eventId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @JsonBackReference
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+//    @JsonBackReference
+//    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", insertable = false, updatable = false)
-    @JsonBackReference
-    private Event event;
+//    @ManyToOne
+//    @JoinColumn(name = "event_id", insertable = false, updatable = false)
+//    @JsonBackReference
+//    private Event event;
 
     @Override
     public String toString() {

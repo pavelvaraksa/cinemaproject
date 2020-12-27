@@ -1,18 +1,19 @@
 package by.itacademy.service;
 
 import by.itacademy.domain.Location;
+import by.itacademy.exception.ServiceException;
 
 import java.util.List;
 
 public interface LocationService {
 
-    List<Location> findAll();
+    List<Location> findAll() throws ServiceException;
 
-    Location findById(Long locationId);
+    Location findById(Long locationId) throws ServiceException;
 
-    Location save(Location location);
+    Location save(Location location) throws ServiceException;
 
-    Location update(Location location);
+    Location update(Location location) throws ServiceException;
 
-    Long delete(Location locationId);
+    Location delete(Long locationId) throws ServiceException;
 }

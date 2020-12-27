@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_movie")
-@EqualsAndHashCode(exclude = {"cinemas", "events"})
+//@EqualsAndHashCode(exclude = {"cinemas", "events"})
 public class Movie {
 
     @Id
@@ -39,13 +39,13 @@ public class Movie {
     @Column
     private Timestamp changed;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Cinema> cinemas = Collections.emptySet();
-
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Event> events = Collections.emptySet();
+//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Cinema> cinemas = Collections.emptySet();
+//
+//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Event> events = Collections.emptySet();
 
     @Override
     public String toString() {
