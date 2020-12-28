@@ -1,8 +1,8 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Location;
-import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
+import by.itacademy.exception.ServiceException;
 import by.itacademy.repository.LocationRepository;
 import by.itacademy.service.LocationService;
 import lombok.extern.log4j.Log4j;
@@ -21,62 +21,111 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<Location> findAll() {
+    public List<Location> findAll() throws ServiceException {
+        List<Location> existingLocations;
         try {
-            List<Location> locationsToFind = locationRepository.findAll();
-            log.info("Locations " + locationsToFind + " exist");
-            return locationsToFind;
+            existingLocations = locationRepository.findAll();
+            if (existingLocations.isEmpty()) {
+                String errorMessage = "The list is empty.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            } else {
+                log.info("Locations exist.");
+                return existingLocations;
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Location service exception while trying to find all locations." + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public Location findById(Long locationId) {
+    public Location findById(Long locationId) throws ServiceException {
+        Location locationToFindById;
+
         try {
-            Location locationToFindById = locationRepository.findById(locationId);
-            log.info("Location with id " + locationId + " exists");
-            return locationToFindById;
+            locationToFindById = locationRepository.findById(locationId);
+            if (locationToFindById == null) {
+                String errorMessage = "Location id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Location service exception while trying to find a location." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("Location with id " + locationId + " exists.");
+            return locationRepository.findById(locationId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find a location.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 
     @Override
-    public Location save(Location location) {
+    public Location save(Location location) throws ServiceException {
+        List<Location> existingLocations;
         try {
-            Location locationToSave = locationRepository.save(location);
+            existingLocations = locationRepository.findAll();
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't get all locations.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
+
+        for (Location existingLocation : existingLocations) {
+            boolean hasSameLocation = existingLocation.getLocation().equals(location.getLocation());
+
+            if (hasSameLocation) {
+                String errorMessage = "Location " + location.getLocation() + " already exists.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
+        }
+
+        try {
+            Location savedLocation = locationRepository.save(location);
             log.info("Location " + location + " was saved");
-            return locationToSave;
+            return savedLocation;
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Location service exception while trying to save a location:" + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public Location update(Location location) {
+    public Location update(Location location) throws ServiceException {
         try {
-            Location locationToUpdate = locationRepository.update(location);
-            log.info("Location " + location + " was updated");
-            return locationToUpdate;
+            return locationRepository.update(location);
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            String errorMessage = "Can't get a location.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
         }
-        return null;
     }
 
     @Override
-    public Location delete(Long locationId) {
+    public Location delete(Long locationId) throws ServiceException {
+        Location locationToFindById;
+
         try {
-            Location locationToDelete = locationRepository.delete(locationId);
-            log.info("Location with id " + locationId + " was deleted");
-            return locationToDelete;
+            locationToFindById = locationRepository.findById(locationId);
+            if (locationToFindById == null) {
+                String errorMessage = "Location id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Location service exception while trying to delete a location." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("Location with id " + locationId + " was deleted.");
+            return locationRepository.delete(locationId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find a location.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 }

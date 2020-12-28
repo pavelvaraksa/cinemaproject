@@ -1,0 +1,1 @@
+2020-12-29 01:04:05 INFO  CinemaServiceImpl:33 - Cinemas exist.

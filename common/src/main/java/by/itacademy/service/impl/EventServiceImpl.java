@@ -1,8 +1,8 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Event;
-import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
+import by.itacademy.exception.ServiceException;
 import by.itacademy.repository.EventRepository;
 import by.itacademy.service.EventService;
 import lombok.extern.log4j.Log4j;
@@ -21,62 +21,92 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> findAll() {
+    public List<Event> findAll() throws ServiceException {
+        List<Event> existingEvents;
         try {
-            List<Event> eventsToFind = eventRepository.findAll();
-            log.info("Events " + eventsToFind + " exist");
-            return eventsToFind;
+            existingEvents = eventRepository.findAll();
+            if (existingEvents.isEmpty()) {
+                String errorMessage = "The list is empty.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            } else {
+                log.info("Events exist.");
+                return existingEvents;
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Event service exception while trying to find all events." + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public Event findById(Long eventId) {
+    public Event findById(Long eventId) throws ServiceException {
+        Event eventToFindById;
+
         try {
-            Event eventToFindById = eventRepository.findById(eventId);
-            log.info("Event with id " + eventId + " exists");
-            return eventToFindById;
+            eventToFindById = eventRepository.findById(eventId);
+            if (eventToFindById == null) {
+                String errorMessage = "Event id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Event service exception while trying to find an event." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("Event with id " + eventId + " exists.");
+            return eventRepository.findById(eventId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find an event.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 
     @Override
-    public Event save(Event event) {
+    public Event save(Event event) throws ServiceException {
         try {
-            Event eventToSave = eventRepository.save(event);
+            Event savedEvent = eventRepository.save(event);
             log.info("Event " + event + " was saved");
-            return eventToSave;
+            return savedEvent;
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Event service exception while trying to save an event:" + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public Event update(Event event) {
+    public Event update(Event event) throws ServiceException {
         try {
-            Event eventToUpdate = eventRepository.update(event);
-            log.info("Event " + event + " was updated");
-            return eventToUpdate;
+            return eventRepository.update(event);
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            String errorMessage = "Can't get an event.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
         }
-        return null;
     }
 
     @Override
-    public Event delete(Long eventId) {
+    public Event delete(Long eventId) throws ServiceException {
+        Event eventToFindById;
+
         try {
-            Event eventToDelete = eventRepository.delete(eventId);
-            log.info("Event with id " + eventId + " was deleted");
-            return eventToDelete;
+            eventToFindById = eventRepository.findById(eventId);
+            if (eventToFindById == null) {
+                String errorMessage = "Event id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Event service exception while trying to delete an event." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("Event with id " + eventId + " was deleted.");
+            return eventRepository.delete(eventId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find an event.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 }

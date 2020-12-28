@@ -1,8 +1,8 @@
 package by.itacademy.service.impl;
 
 import by.itacademy.domain.Ticket;
-import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;
+import by.itacademy.exception.ServiceException;
 import by.itacademy.repository.TicketRepository;
 import by.itacademy.service.TicketService;
 import lombok.extern.log4j.Log4j;
@@ -21,62 +21,111 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> findAll() {
+    public List<Ticket> findAll() throws ServiceException {
+        List<Ticket> existingTickets;
         try {
-            List<Ticket> ticketsToFind = ticketRepository.findAll();
-            log.info("Tickets " + ticketsToFind + " exist");
-            return ticketsToFind;
+            existingTickets = ticketRepository.findAll();
+            if (existingTickets.isEmpty()) {
+                String errorMessage = "The list is empty.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            } else {
+                log.info("Tickets exist.");
+                return existingTickets;
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Ticket service exception while trying to find all tickets." + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public Ticket findById(Long ticketId) {
+    public Ticket findById(Long ticketId) throws ServiceException {
+        Ticket ticketToFindById;
+
         try {
-            Ticket ticketToFindById = ticketRepository.findById(ticketId);
-            log.info("Ticket with id " + ticketId + " exists");
-            return ticketToFindById;
+            ticketToFindById = ticketRepository.findById(ticketId);
+            if (ticketToFindById == null) {
+                String errorMessage = "Ticket id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Ticket service exception while trying to find a ticket." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("Ticket with id " + ticketId + " exists.");
+            return ticketRepository.findById(ticketId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find a ticket.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Ticket save(Ticket ticket) throws ServiceException {
+        List<Ticket> existingTickets;
         try {
-            Ticket ticketToSave = ticketRepository.save(ticket);
+            existingTickets = ticketRepository.findAll();
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't get all tickets.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
+
+        for (Ticket existingTicket : existingTickets) {
+            boolean hasSamePlaceNumber = existingTicket.getPlaceNumber() == ticket.getPlaceNumber();
+
+            if (hasSamePlaceNumber) {
+                String errorMessage = "Place number " + ticket.getPlaceNumber() + " already exists.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
+        }
+
+        try {
+            Ticket savedTicket = ticketRepository.save(ticket);
             log.info("Ticket " + ticket + " was saved");
-            return ticketToSave;
+            return savedTicket;
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Ticket service exception while trying to save a ticket:" + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public Ticket update(Ticket ticket) {
+    public Ticket update(Ticket ticket) throws ServiceException {
         try {
-            Ticket ticketToUpdate = ticketRepository.update(ticket);
-            log.info("Ticket " + ticket + " was updated");
-            return ticketToUpdate;
+            return ticketRepository.update(ticket);
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            String errorMessage = "Can't get a ticket.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
         }
-        return null;
     }
 
     @Override
-    public Ticket delete(Long ticketId) {
+    public Ticket delete(Long ticketId) throws ServiceException {
+        Ticket ticketToFindById;
+
         try {
-            Ticket ticketToDelete = ticketRepository.delete(ticketId);
-            log.info("Ticket with id " + ticketId + " was deleted");
-            return ticketToDelete;
+            ticketToFindById = ticketRepository.findById(ticketId);
+            if (ticketToFindById == null) {
+                String errorMessage = "Ticket id can't be null.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
         } catch (RepositoryException e) {
-            log.error(e.getMessage());
+            throw new ServiceException("Ticket service exception while trying to delete a ticket." + e.getMessage());
         }
-        return null;
+
+        try {
+            log.info("Ticket with id " + ticketId + " was deleted.");
+            return ticketRepository.delete(ticketId);
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't find a ticket.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
     }
 }
