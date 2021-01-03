@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_user")
-@EqualsAndHashCode(exclude = {"role"})
+@EqualsAndHashCode(exclude = {"role", "tickets"})
 public class User {
 
     @Id
@@ -38,9 +38,9 @@ public class User {
     @JsonManagedReference
     private UserRole role;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<Ticket> tickets = Collections.emptySet();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Ticket> tickets = Collections.emptySet();
 
     @Override
     public String toString() {

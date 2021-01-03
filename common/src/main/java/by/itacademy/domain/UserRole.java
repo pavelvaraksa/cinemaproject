@@ -1,7 +1,7 @@
 package by.itacademy.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "m_role")
+@EqualsAndHashCode
 public class UserRole {
 
     @Id

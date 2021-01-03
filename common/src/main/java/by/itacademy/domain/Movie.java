@@ -1,5 +1,6 @@
 package by.itacademy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,7 +15,6 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_movie")
-//@EqualsAndHashCode(exclude = {"cinemas", "events"})
 public class Movie {
 
     @Id
@@ -39,13 +39,13 @@ public class Movie {
     @Column
     private Timestamp changed;
 
-//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<Cinema> cinemas = Collections.emptySet();
-//
-//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<Event> events = Collections.emptySet();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "m_cinema",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
+    @JsonIgnoreProperties("movies")
+    private Set<Location> locations = Collections.emptySet();
 
     @Override
     public String toString() {

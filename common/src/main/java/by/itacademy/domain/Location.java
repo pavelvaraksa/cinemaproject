@@ -1,6 +1,6 @@
 package by.itacademy.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_location")
-//@EqualsAndHashCode(exclude = {"cinemas"})
+@EqualsAndHashCode(exclude = {"movies"})
 public class Location {
 
     @Id
@@ -30,9 +30,9 @@ public class Location {
     @Column
     private Timestamp changed;
 
-//    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<Cinema> cinemas = Collections.emptySet();
+    @ManyToMany(mappedBy = "locations", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("locations")
+    private Set<Movie> movies = Collections.emptySet();
 
     @Override
     public String toString() {

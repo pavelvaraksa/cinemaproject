@@ -1,21 +1,16 @@
 package by.itacademy.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "m_event")
-//@EqualsAndHashCode(exclude = {"tickets"})
 public class Event {
 
     @Id
@@ -43,19 +38,13 @@ public class Event {
     @Column(name = "cinema_id")
     private Long cinemaId;
 
-//    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<Ticket> tickets = Collections.emptySet();
-//
-//    @ManyToOne
-//    @JoinColumn(name = "movie_id", insertable = false, updatable = false)
-//    @JsonBackReference
-//    private Movie movie;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "cinema_id", insertable = false, updatable = false)
-//    @JsonBackReference
-//    private Cinema cinema;
+    @Column(name = "ticket_id")
+    private Long ticketId;
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private Ticket ticket;
 
     @Override
     public String toString() {

@@ -18,4 +18,6 @@ public class EventCreateRequest {
     private Long movieId;
 
     private Long cinemaId;
+
+    private Long ticketId;
 }
