@@ -1,8 +1,6 @@
 package by.itacademy.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

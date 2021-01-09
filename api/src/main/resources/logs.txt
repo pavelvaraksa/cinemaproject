@@ -1,72 +1,48 @@
-2021-01-02 02:53:02 INFO  MovieServiceImpl:57 - Movie with id 2 exists.
-2021-01-02 02:55:51 INFO  MovieServiceImpl:57 - Movie with id 1 exists.
-2021-01-02 02:57:03 INFO  MovieServiceImpl:57 - Movie with id 2 exists.
-2021-01-02 02:57:13 INFO  MovieServiceImpl:57 - Movie with id 4 exists.
-2021-01-02 02:59:58 INFO  MovieServiceImpl:57 - Movie with id 3 exists.
-2021-01-02 03:00:03 ERROR MovieServiceImpl:49 - Movie id can't be null.
-2021-01-02 03:00:03 ERROR MovieRestController:49 - Can't find a movie.
-2021-01-02 03:00:17 INFO  MovieServiceImpl:57 - Movie with id 4 exists.
-2021-01-02 03:01:04 INFO  MovieServiceImpl:57 - Movie with id 4 exists.
-2021-01-02 03:01:08 INFO  MovieServiceImpl:57 - Movie with id 9 exists.
-2021-01-02 03:01:37 INFO  CinemaServiceImpl:57 - Cinema with id 52 exists.
-2021-01-02 03:05:13 INFO  MovieServiceImpl:57 - Movie with id 3 exists.
-2021-01-02 03:09:18 INFO  MovieServiceImpl:57 - Movie with id 2 exists.
-2021-01-02 03:11:02 INFO  MovieServiceImpl:57 - Movie with id 1 exists.
-2021-01-02 03:13:00 INFO  MovieServiceImpl:57 - Movie with id 4 exists.
-2021-01-02 03:29:53 INFO  MovieServiceImpl:57 - Movie with id 2 exists.
-2021-01-02 03:30:48 INFO  MovieServiceImpl:57 - Movie with id 2 exists.
-2021-01-02 03:31:46 INFO  MovieServiceImpl:57 - Movie with id 5 exists.
-2021-01-02 03:32:02 INFO  LocationServiceImpl:57 - Location with id 2 exists.
-2021-01-02 03:32:06 INFO  LocationServiceImpl:57 - Location with id 1 exists.
-2021-01-02 03:32:48 INFO  CinemaServiceImpl:57 - Cinema with id 1 exists.
-2021-01-02 03:33:58 INFO  CinemaServiceImpl:57 - Cinema with id 1 exists.
-2021-01-02 03:34:12 INFO  CinemaServiceImpl:57 - Cinema with id 1 exists.
-2021-01-02 03:34:29 INFO  LocationServiceImpl:57 - Location with id 2 exists.
-2021-01-02 03:34:32 INFO  LocationServiceImpl:57 - Location with id 1 exists.
-2021-01-02 03:34:35 INFO  LocationServiceImpl:57 - Location with id 3 exists.
-2021-01-02 03:34:38 INFO  LocationServiceImpl:57 - Location with id 4 exists.
-2021-01-02 03:34:42 INFO  LocationServiceImpl:57 - Location with id 5 exists.
-2021-01-02 03:37:35 INFO  LocationServiceImpl:57 - Location with id 1 exists.
-2021-01-02 03:37:38 INFO  LocationServiceImpl:57 - Location with id 2 exists.
-2021-01-02 03:37:45 INFO  LocationServiceImpl:57 - Location with id 3 exists.
-2021-01-02 03:38:12 ERROR LocationServiceImpl:49 - Location id can't be null.
-2021-01-02 03:38:12 ERROR LocationRestController:49 - Can't find a location.
-2021-01-02 03:38:22 INFO  CinemaServiceImpl:57 - Cinema with id 1 exists.
-2021-01-02 03:38:45 INFO  CinemaServiceImpl:57 - Cinema with id 52 exists.
-2021-01-02 03:39:06 INFO  MovieServiceImpl:57 - Movie with id 1 exists.
-2021-01-02 03:40:24 INFO  CinemaServiceImpl:57 - Cinema with id 1 exists.
-2021-01-02 03:40:37 INFO  LocationServiceImpl:57 - Location with id 2 exists.
-2021-01-02 03:40:57 INFO  MovieServiceImpl:57 - Movie with id 3 exists.
-2021-01-02 03:43:25 INFO  MovieServiceImpl:57 - Movie with id 4 exists.
-2021-01-03 02:13:21 INFO  MovieServiceImpl:57 - Movie with id 2 exists.
-2021-01-03 02:14:12 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 02:14:34 ERROR TicketServiceImpl:49 - Ticket id can't be null.
-2021-01-03 02:14:34 ERROR TicketRestController:49 - Can't find a ticket.
-2021-01-03 02:14:44 ERROR CinemaServiceImpl:49 - Cinema id can't be null.
-2021-01-03 02:14:44 ERROR CinemaRestController:49 - Can't find an cinema.
-2021-01-03 02:15:25 ERROR CinemaServiceImpl:49 - Cinema id can't be null.
-2021-01-03 02:15:25 ERROR CinemaRestController:49 - Can't find an cinema.
-2021-01-03 02:15:28 INFO  CinemaServiceImpl:57 - Cinema with id 1 exists.
-2021-01-03 02:33:42 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 02:55:37 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 03:10:58 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 03:13:09 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 03:17:19 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 03:19:22 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 03:49:18 ERROR TicketServiceImpl:49 - Ticket id can't be null.
-2021-01-03 03:49:18 ERROR TicketRestController:49 - Can't find a ticket.
-2021-01-03 03:55:33 ERROR TicketServiceImpl:49 - Ticket id can't be null.
-2021-01-03 03:55:33 ERROR TicketRestController:49 - Can't find a ticket.
-2021-01-03 03:57:27 ERROR TicketServiceImpl:49 - Ticket id can't be null.
-2021-01-03 03:57:27 ERROR TicketRestController:49 - Can't find a ticket.
-2021-01-03 03:57:46 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 04:04:22 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 04:06:10 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 04:06:13 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 21:28:37 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 21:54:44 INFO  EventServiceImpl:33 - Events exist.
-2021-01-03 21:55:51 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-03 21:55:59 ERROR UserServiceImpl:49 - User id can't be null.
-2021-01-03 21:55:59 ERROR UserRestController:43 - Can't find an user.
-2021-01-03 23:41:46 INFO  UserServiceImpl:57 - User with id 195 exists.
-2021-01-04 00:51:32 INFO  LocationServiceImpl:57 - Location with id 1 exists.
+2021-01-09 17:04:20 INFO  UserServiceProvider:31 - User with login Bob11 exists.
+2021-01-09 17:05:15 ERROR UserServiceProvider:34 - No user found with login.
+2021-01-09 17:05:15 ERROR UserServiceProvider:38 - User with this login not found.
+2021-01-09 17:07:29 ERROR UserServiceProvider:34 - No user found with login st
+2021-01-09 17:07:29 ERROR UserServiceProvider:38 - User with this login not found.
+2021-01-09 18:44:48 ERROR UserServiceProvider:53 - User with this login not found.
+2021-01-09 18:45:13 ERROR UserServiceProvider:53 - User with this login not found.
+2021-01-09 18:49:01 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 18:50:36 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 18:52:02 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 18:52:28 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 18:54:37 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 18:55:41 INFO  UserServiceImpl:89 - User mike was saved
+2021-01-09 18:56:30 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 18:58:01 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 18:58:04 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 18:58:19 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 18:58:20 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 19:06:45 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 19:07:12 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 19:07:12 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 19:10:49 ERROR UserServiceProvider:41 - No user found with login m45re
+2021-01-09 19:10:49 ERROR UserServiceProvider:45 - User with this login not found.
+2021-01-09 19:13:17 INFO  UserServiceProvider:38 - User with login mike exists.
+2021-01-09 19:22:01 ERROR UserServiceProvider:34 - Can't find an user with login mike3
+2021-01-09 19:22:01 ERROR UserServiceProvider:38 - Security exception while trying to find an user.
+2021-01-09 19:24:43 ERROR UserServiceProvider:34 - Can't find an user with login mike3
+2021-01-09 19:24:43 ERROR UserServiceProvider:38 - Security exception while trying to find an user.
+2021-01-09 19:25:09 ERROR UserServiceProvider:34 - Can't find an user with login mike3
+2021-01-09 19:25:09 ERROR UserServiceProvider:38 - Security exception while trying to find an user.
+2021-01-09 19:26:21 ERROR UserServiceProvider:34 - Can't find an user with login mike3.
+2021-01-09 19:26:21 ERROR UserServiceProvider:38 - Security exception while trying to find an user.
+2021-01-09 19:27:39 INFO  UserServiceProvider:31 - User with login mike exists.
+2021-01-09 19:27:43 INFO  UserServiceProvider:31 - User with login mike exists.
+2021-01-09 19:28:26 INFO  UserServiceProvider:31 - User with login mike exists.
+2021-01-09 19:28:26 INFO  UserServiceProvider:31 - User with login mike exists.
+2021-01-09 19:31:15 ERROR UserServiceProvider:35 - Can't find an user with login mik2e.
+2021-01-09 19:31:15 ERROR UserServiceProvider:39 - Security exception while trying to find an user.
+2021-01-09 19:34:49 ERROR UserServiceProvider:35 - Can't find an user with login mik2e.
+2021-01-09 19:35:45 ERROR UserServiceProvider:35 - Can't find an user with login mik2e.
+2021-01-09 19:39:42 ERROR UserServiceProvider:35 - Can't find an user with login mik2e.
+2021-01-09 19:45:11 ERROR UserServiceProvider:36 - Can't find an user with login sg.
+2021-01-09 19:46:30 ERROR UserServiceProvider:36 - Can't find an user with login sg.
+2021-01-09 19:48:17 ERROR UserServiceProvider:36 - Can't find an user with login sg.
+2021-01-09 20:08:18 INFO  UserServiceProvider:32 - User with login mike exists.
+2021-01-09 20:08:18 INFO  UserServiceProvider:32 - User with login mike exists.
+2021-01-09 20:08:32 INFO  UserServiceProvider:32 - User with login mike exists.
+2021-01-09 20:08:49 ERROR UserServiceProvider:35 - Can't find an user with login mik.

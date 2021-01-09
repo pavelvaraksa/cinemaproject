@@ -7,7 +7,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-public class PersistenceContextBeansConfig {
+public class PersistenceContextBeanConfig {
 
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {

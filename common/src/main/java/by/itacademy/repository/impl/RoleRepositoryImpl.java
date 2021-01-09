@@ -1,12 +1,10 @@
 package by.itacademy.repository.impl;
 
-import by.itacademy.repository.UserRepository;
-import by.itacademy.domain.User;
-import org.hibernate.Criteria;
+import by.itacademy.domain.UserRole;
+import by.itacademy.repository.RoleRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -14,39 +12,39 @@ import java.util.List;
 
 @Repository
 @Primary
-public class UserRepositoryImpl implements UserRepository {
+public class RoleRepositoryImpl implements RoleRepository {
 
     private final SessionFactory sessionFactory;
 
-    public UserRepositoryImpl(SessionFactory sessionFactory) {
+    public RoleRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public List<User> findAll() {
+    public List<UserRole> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            String hqlQuery = "select u from User u";
-            return session.createQuery(hqlQuery, User.class).list();
+            String hqlQuery = "select u from UserRole u";
+            return session.createQuery(hqlQuery, UserRole.class).list();
         }
     }
 
     @Override
-    public User findById(Long userId) {
+    public UserRole findById(Long userId) {
         try (Session session = sessionFactory.openSession()) {
-            return session.find(User.class, userId);
+            return session.find(UserRole.class, userId);
         }
     }
 
     @Override
-    public User save(User user) {
+    public UserRole save(UserRole userRole) {
         try (Session session = sessionFactory.openSession()) {
-            session.save(user);
-            return user;
+            session.save(userRole);
+            return userRole;
         }
     }
 
     @Override
-    public User update(User userId) {
+    public UserRole update(UserRole userId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
@@ -57,21 +55,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User delete(Long userId) {
+    public UserRole delete(Long userId) {
         try (Session session = sessionFactory.openSession()) {
-            User userDeleteById = session.find(User.class, userId);
+            UserRole userDeleteById = session.find(UserRole.class, userId);
             Transaction transaction = session.getTransaction();
             transaction.begin();
             session.delete(userDeleteById);
             transaction.commit();
             return userDeleteById;
         }
-    }
-
-    @Override
-    public User findByLogin(String login) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-        criteria.add(Restrictions.like("login", login));
-        return (User) criteria.uniqueResult();
     }
 }
