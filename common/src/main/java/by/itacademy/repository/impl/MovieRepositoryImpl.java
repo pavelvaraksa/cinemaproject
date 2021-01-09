@@ -5,7 +5,9 @@ import by.itacademy.domain.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +22,8 @@ public class MovieRepositoryImpl implements MovieRepository {
         this.sessionFactory = sessionFactory;
     }
 
+    @Cacheable("movies")
+    @Query(value = "select m from Movie m")
     @Override
     public List<Movie> findAll() {
         try (Session session = sessionFactory.openSession()) {

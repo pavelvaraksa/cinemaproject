@@ -5,7 +5,9 @@ import by.itacademy.domain.Location;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +22,8 @@ public class LocationRepositoryImpl implements LocationRepository {
         this.sessionFactory = sessionFactory;
     }
 
+    @Cacheable("locations")
+    @Query(value = "select l from Location l")
     @Override
     public List<Location> findAll() {
         try (Session session = sessionFactory.openSession()) {

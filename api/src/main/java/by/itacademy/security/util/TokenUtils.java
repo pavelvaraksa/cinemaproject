@@ -1,6 +1,6 @@
 package by.itacademy.security.util;
 
-import by.itacademy.security.configuration.JwtTokenConfig;
+import by.itacademy.security.config.JwtTokenConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;

@@ -7,6 +7,8 @@ import by.itacademy.domain.Cinema;
 import by.itacademy.service.CinemaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;

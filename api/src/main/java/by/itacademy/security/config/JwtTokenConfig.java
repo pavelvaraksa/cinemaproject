@@ -1,4 +1,4 @@
-package by.itacademy.security.configuration;
+package by.itacademy.security.config;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
