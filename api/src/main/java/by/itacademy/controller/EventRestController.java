@@ -67,8 +67,6 @@ public class EventRestController {
         eventToSave.setTicketsCount(eventCreateRequest.getTicketsCount());
         eventToSave.setCreated(new Timestamp(System.currentTimeMillis()));
         eventToSave.setChanged(new Timestamp(System.currentTimeMillis()));
-        eventToSave.setMovieId(eventCreateRequest.getMovieId());
-        eventToSave.setCinemaId(eventCreateRequest.getCinemaId());
         eventToSave.setTicketId(eventCreateRequest.getTicketId());
 
         try {

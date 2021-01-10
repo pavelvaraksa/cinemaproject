@@ -19,5 +19,5 @@ public class CinemaCreateRequest {
 
     private Long locationId;
 
-    private Long movieId;
+    private Long eventId;
 }

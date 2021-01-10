@@ -1,24 +1,14 @@
 package by.itacademy.controller;
 
 import by.itacademy.controller.request.CinemaCreateRequest;
+import by.itacademy.domain.Cinema;
 import by.itacademy.exception.ControllerException;
 import by.itacademy.exception.ServiceException;
-import by.itacademy.domain.Cinema;
 import by.itacademy.service.CinemaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -71,7 +61,7 @@ public class CinemaRestController {
         cinemaToSave.setCreated(new Timestamp(System.currentTimeMillis()));
         cinemaToSave.setChanged(new Timestamp(System.currentTimeMillis()));
         cinemaToSave.setLocationId(cinemaCreateRequest.getLocationId());
-        cinemaToSave.setMovieId(cinemaCreateRequest.getMovieId());
+        cinemaToSave.setEventId(cinemaCreateRequest.getEventId());
 
         try {
             return cinemaService.save(cinemaToSave);

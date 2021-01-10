@@ -16,4 +16,6 @@ public class MovieCreateRequest {
     private int year;
 
     private int duration;
+
+    private Long cinemaId;
 }

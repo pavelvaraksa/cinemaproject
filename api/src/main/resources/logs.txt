@@ -63,3 +63,30 @@
 2021-01-10 02:54:58 INFO  CinemaServiceImpl:89 - Cinema Raketa was saved
 2021-01-10 02:55:09 INFO  MovieServiceImpl:33 - Movies exist.
 2021-01-10 04:11:19 INFO  UserServiceImpl:57 - User with id 222 exists.
+2021-01-10 14:01:46 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 14:06:31 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 14:38:46 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-10 14:45:07 INFO  CinemaServiceImpl:57 - Cinema with id 55 exists.
+2021-01-10 15:09:39 INFO  CinemaServiceImpl:57 - Cinema with id 55 exists.
+2021-01-10 15:09:57 INFO  LocationServiceImpl:57 - Location with id 3 exists.
+2021-01-10 15:10:01 ERROR LocationServiceImpl:49 - Location id can't be null.
+2021-01-10 15:10:01 ERROR LocationRestController:49 - Can't find a location.
+2021-01-10 15:10:39 INFO  LocationServiceImpl:57 - Location with id 4 exists.
+2021-01-10 15:12:55 INFO  LocationServiceImpl:57 - Location with id 4 exists.
+2021-01-10 15:14:30 INFO  LocationServiceImpl:57 - Location with id 4 exists.
+2021-01-10 15:16:39 INFO  LocationServiceImpl:57 - Location with id 4 exists.
+2021-01-10 15:20:03 INFO  UserServiceImpl:33 - Users exist.
+2021-01-10 15:20:21 INFO  LocationServiceImpl:57 - Location with id 4 exists.
+2021-01-10 15:24:01 INFO  LocationServiceImpl:57 - Location with id 4 exists.
+2021-01-10 15:48:05 ERROR TicketServiceImpl:30 - The list is empty.
+2021-01-10 15:48:05 ERROR TicketRestController:38 - Can't find any tickets.
+2021-01-10 16:02:25 INFO  UserServiceImpl:57 - User with id 222 exists.
+2021-01-10 16:32:30 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-10 16:32:55 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 16:33:39 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 16:34:02 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 16:34:21 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-10 16:34:38 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-10 16:37:31 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-10 16:38:14 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-10 16:38:27 INFO  UserServiceImpl:57 - User with id 222 exists.

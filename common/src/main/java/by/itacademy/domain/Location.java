@@ -1,12 +1,23 @@
 package by.itacademy.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.GenerationType;
+
 import java.sql.Timestamp;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -14,7 +25,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_location")
-@EqualsAndHashCode(exclude = {"movies"})
+@EqualsAndHashCode(exclude = {"cinemas"})
 public class Location {
 
     @Id
@@ -30,12 +41,7 @@ public class Location {
     @Column
     private Timestamp changed;
 
-    @ManyToMany(mappedBy = "locations", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("locations")
-    private Set<Movie> movies = Collections.emptySet();
-
-    @Override
-    public String toString() {
-        return location;
-    }
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Cinema> cinemas = Collections.emptySet();
 }

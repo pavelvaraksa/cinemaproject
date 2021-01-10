@@ -6,7 +6,6 @@ import by.itacademy.domain.User;
 import by.itacademy.domain.UserRole;
 import by.itacademy.exception.ControllerException;
 import by.itacademy.exception.ServiceException;
-import by.itacademy.repository.UserRepository;
 import by.itacademy.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -14,12 +13,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.Role;
 import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.List;
 
 @Log4j
@@ -29,8 +25,6 @@ import java.util.List;
 public class UserRestController {
 
     private final UserService userService;
-
-    private final UserRepository userRepository;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

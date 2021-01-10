@@ -1,21 +1,33 @@
 package by.itacademy.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.GenerationType;
+
 import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Set;
+
 
 @Getter
 @Setter
 @Entity
 @Table(name = "m_ticket")
-@EqualsAndHashCode(exclude = {"user", "events"})
+@EqualsAndHashCode(exclude = {"user", "event"})
 public class Ticket {
 
     @Id
@@ -28,29 +40,26 @@ public class Ticket {
     @Column
     private double price;
 
-    @Column(name = "user_id")
-    private Long userId;
-
     @Column
     private Timestamp created;
 
     @Column
     private Timestamp changed;
 
+    @JsonIgnore
+    @Column(name = "user_id")
+    private Long userId;
+
+    @JsonIgnore
     @Column(name = "event_id")
     private Long eventId;
+
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Event event;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @JsonBackReference
     private User user;
-
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Event> events = Collections.emptySet();
-
-    @Override
-    public String toString() {
-        return "with user_id " + userId + " and event_id ";
-    }
 }

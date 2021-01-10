@@ -1,13 +1,21 @@
 package by.itacademy.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.GenerationType;
+
 import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -37,16 +45,12 @@ public class Movie {
     @Column
     private Timestamp changed;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "m_cinema",
-            joinColumns = @JoinColumn(name = "location_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
-    @JsonIgnoreProperties("movies")
-    private Set<Location> locations = Collections.emptySet();
+    @JsonIgnore
+    @Column(name = "cinema_id")
+    private Long cinemaId;
 
-    @Override
-    public String toString() {
-        return title;
-    }
+    @ManyToOne
+    @JoinColumn(name = "cinema_id", insertable = false, updatable = false)
+    @JsonBackReference
+    private Cinema cinema;
 }

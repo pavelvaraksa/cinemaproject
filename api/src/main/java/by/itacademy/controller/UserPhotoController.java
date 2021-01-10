@@ -1,4 +1,4 @@
-package by.itacademy.controller.request;
+package by.itacademy.controller;
 
 import by.itacademy.domain.User;
 import by.itacademy.exception.RepositoryException;

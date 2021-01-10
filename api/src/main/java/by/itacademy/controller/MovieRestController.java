@@ -74,6 +74,7 @@ public class MovieRestController {
         movieToSave.setDuration(movieCreateRequest.getDuration());
         movieToSave.setCreated(new Timestamp(System.currentTimeMillis()));
         movieToSave.setChanged(new Timestamp(System.currentTimeMillis()));
+        movieToSave.setCinemaId(movieCreateRequest.getCinemaId());
 
         try {
             return movieService.save(movieToSave);
