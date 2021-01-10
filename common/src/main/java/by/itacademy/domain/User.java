@@ -40,6 +40,9 @@ public class User {
     @Column
     private Timestamp changed;
 
+    @Column(name = "photo_link")
+    private String photoLink;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private UserRole role;

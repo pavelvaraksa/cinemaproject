@@ -53,3 +53,13 @@
 2021-01-09 23:50:20 INFO  LocationServiceImpl:33 - Locations exist.
 2021-01-09 23:51:16 INFO  LocationServiceImpl:33 - Locations exist.
 2021-01-09 23:51:35 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 02:38:20 INFO  CinemaServiceImpl:89 - Cinema Aurora was saved
+2021-01-10 02:40:18 INFO  CinemaServiceImpl:89 - Cinema Dom Kino was saved
+2021-01-10 02:41:45 INFO  CinemaServiceImpl:89 - Cinema Oktyabr was saved
+2021-01-10 02:44:06 INFO  CinemaServiceImpl:89 - Cinema Salut was saved
+2021-01-10 02:45:54 INFO  CinemaServiceImpl:89 - Cinema Komsomolets was saved
+2021-01-10 02:50:47 INFO  CinemaServiceImpl:89 - Cinema Berestie was saved
+2021-01-10 02:52:38 INFO  CinemaServiceImpl:89 - Cinema Moskva was saved
+2021-01-10 02:54:58 INFO  CinemaServiceImpl:89 - Cinema Raketa was saved
+2021-01-10 02:55:09 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-10 04:11:19 INFO  UserServiceImpl:57 - User with id 222 exists.
