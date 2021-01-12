@@ -29,6 +29,7 @@ public class UserRestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<User> findAllUsers() throws ControllerException {
+
         try {
             return userService.findAll();
         } catch (ServiceException e) {
@@ -40,6 +41,7 @@ public class UserRestController {
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public User findUserById(@PathVariable Long userId) throws ControllerException {
+
         try {
             return userService.findById(userId);
         } catch (ServiceException e) {
@@ -55,6 +57,7 @@ public class UserRestController {
 
     @ResponseStatus(HttpStatus.CREATED)
     public User saveUser(@RequestBody UserCreateRequest userCreateRequest) throws ControllerException {
+
         String login = userCreateRequest.getLogin();
         String password = userCreateRequest.getPassword();
 
@@ -84,6 +87,7 @@ public class UserRestController {
     @ResponseStatus(HttpStatus.OK)
     public User updateUser(@PathVariable Long userId,
                            @RequestBody UserCreateRequest userCreateRequest) throws ControllerException {
+
         String login = userCreateRequest.getLogin();
         String password = userCreateRequest.getLogin();
 
@@ -108,6 +112,7 @@ public class UserRestController {
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public User deleteUser(@PathVariable Long userId) throws ControllerException {
+
         try {
             return userService.delete(userId);
         } catch (ServiceException e) {

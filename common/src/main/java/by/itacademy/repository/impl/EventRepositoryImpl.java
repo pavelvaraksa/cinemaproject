@@ -22,14 +22,16 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public List<Event> findAll() {
+
         try (Session session = sessionFactory.openSession()) {
-            String hqlQuery = "select u from Event u";
+            String hqlQuery = "select e from Event e";
             return session.createQuery(hqlQuery, Event.class).list();
         }
     }
 
     @Override
     public Event findById(Long eventId) {
+
         try (Session session = sessionFactory.openSession()) {
             return session.find(Event.class, eventId);
         }
@@ -37,6 +39,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public Event save(Event event) {
+
         try (Session session = sessionFactory.openSession()) {
             session.save(event);
             return event;
@@ -45,6 +48,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public Event update(Event eventId) {
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
@@ -56,6 +60,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public Event delete(Long eventId) {
+
         try (Session session = sessionFactory.openSession()) {
             Event eventDeleteById = session.find(Event.class, eventId);
             Transaction transaction = session.getTransaction();

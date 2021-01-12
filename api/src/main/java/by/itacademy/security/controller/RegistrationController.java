@@ -1,10 +1,14 @@
 package by.itacademy.security.controller;
 
 import by.itacademy.controller.request.UserCreateRequest;
+import by.itacademy.domain.SystemRoles;
 import by.itacademy.domain.User;
+import by.itacademy.domain.UserRole;
 import by.itacademy.exception.ServiceException;
 import by.itacademy.service.UserService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +31,7 @@ public class RegistrationController {
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> registration(@RequestBody UserCreateRequest userCreateRequest) throws ServiceException {
+
         User user = new User();
         user.setName(userCreateRequest.getName());
         user.setSurname(userCreateRequest.getSurname());
@@ -34,6 +39,7 @@ public class RegistrationController {
         user.setPassword(passwordEncoder.encode(userCreateRequest.getPassword()));
         user.setCreated(new java.sql.Timestamp(System.currentTimeMillis()));
         user.setChanged(new java.sql.Timestamp(System.currentTimeMillis()));
+        user.setRole(new UserRole(SystemRoles.ROLE_USER, user));
         User savedUser = userService.save(user);
 
         Map<String, Object> result = new HashMap<>();

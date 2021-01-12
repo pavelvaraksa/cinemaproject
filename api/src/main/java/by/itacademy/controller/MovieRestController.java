@@ -32,6 +32,7 @@ public class MovieRestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Movie> findAllMovies() throws ControllerException {
+
         try {
             return movieService.findAll();
         } catch (ServiceException e) {
@@ -43,6 +44,7 @@ public class MovieRestController {
     @GetMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
     public Movie findMovieById(@PathVariable Long movieId) throws ControllerException {
+
         try {
             return movieService.findById(movieId);
         } catch (ServiceException e) {
@@ -54,6 +56,7 @@ public class MovieRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Movie saveMovie(@RequestBody MovieCreateRequest movieCreateRequest) throws ControllerException {
+
         String title = movieCreateRequest.getTitle();
         String genre = movieCreateRequest.getGenre();
         int year = movieCreateRequest.getYear();
@@ -88,6 +91,7 @@ public class MovieRestController {
     @ResponseStatus(HttpStatus.OK)
     public Movie updateMovie(@PathVariable Long movieId,
                              @RequestBody MovieCreateRequest movieCreateRequest) throws ControllerException {
+
         String title = movieCreateRequest.getTitle();
         String genre = movieCreateRequest.getGenre();
         int year = movieCreateRequest.getYear();
@@ -118,6 +122,7 @@ public class MovieRestController {
     @DeleteMapping("/{movieId}")
     @ResponseStatus(HttpStatus.OK)
     public Movie deleteMovie(@PathVariable Long movieId) throws ControllerException {
+
         try {
             return movieService.delete(movieId);
         } catch (ServiceException e) {

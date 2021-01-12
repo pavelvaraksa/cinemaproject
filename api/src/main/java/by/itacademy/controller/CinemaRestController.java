@@ -24,6 +24,7 @@ public class CinemaRestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Cinema> findAllCinemas() throws ControllerException {
+
         try {
             return cinemaService.findAll();
         } catch (ServiceException e) {
@@ -35,6 +36,7 @@ public class CinemaRestController {
     @GetMapping("/{cinemaId}")
     @ResponseStatus(HttpStatus.OK)
     public Cinema findCinemaById(@PathVariable Long cinemaId) throws ControllerException {
+
         try {
             return cinemaService.findById(cinemaId);
         } catch (ServiceException e) {
@@ -46,6 +48,7 @@ public class CinemaRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cinema saveCinema(@RequestBody CinemaCreateRequest cinemaCreateRequest) throws ControllerException {
+
         String name = cinemaCreateRequest.getName();
         String address = cinemaCreateRequest.getAddress();
 
@@ -61,7 +64,6 @@ public class CinemaRestController {
         cinemaToSave.setCreated(new Timestamp(System.currentTimeMillis()));
         cinemaToSave.setChanged(new Timestamp(System.currentTimeMillis()));
         cinemaToSave.setLocationId(cinemaCreateRequest.getLocationId());
-        cinemaToSave.setEventId(cinemaCreateRequest.getEventId());
 
         try {
             return cinemaService.save(cinemaToSave);
@@ -75,6 +77,7 @@ public class CinemaRestController {
     @ResponseStatus(HttpStatus.OK)
     public Cinema updateCinema(@PathVariable Long cinemaId,
                                @RequestBody CinemaCreateRequest cinemaCreateRequest) throws ControllerException {
+
         String name = cinemaCreateRequest.getName();
         String address = cinemaCreateRequest.getAddress();
 
@@ -99,6 +102,7 @@ public class CinemaRestController {
     @DeleteMapping("/{cinemaId}")
     @ResponseStatus(HttpStatus.OK)
     public Cinema deleteCinema(@PathVariable Long cinemaId) throws ControllerException {
+
         try {
             return cinemaService.delete(cinemaId);
         } catch (ServiceException e) {

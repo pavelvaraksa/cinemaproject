@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
@@ -21,13 +21,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 
 import java.sql.Timestamp;
-
+import java.util.Collections;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "m_ticket")
-@EqualsAndHashCode(exclude = {"user", "event"})
+@EqualsAndHashCode(exclude = {"user", "events"})
 public class Ticket {
 
     @Id
@@ -50,16 +51,17 @@ public class Ticket {
     @Column(name = "user_id")
     private Long userId;
 
-    @JsonIgnore
-    @Column(name = "event_id")
-    private Long eventId;
-
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
-    private Event event;
+    private Set<Event> events = Collections.emptySet();
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @JsonBackReference
     private User user;
+
+    @Override
+    public String toString() {
+        return "with id " + id;
+    }
 }

@@ -90,3 +90,132 @@
 2021-01-10 16:37:31 INFO  TicketServiceImpl:33 - Tickets exist.
 2021-01-10 16:38:14 INFO  TicketServiceImpl:33 - Tickets exist.
 2021-01-10 16:38:27 INFO  UserServiceImpl:57 - User with id 222 exists.
+2021-01-10 18:18:20 ERROR TicketServiceImpl:82 - Place number 33 already exists.
+2021-01-10 18:18:20 ERROR TicketRestController:75 - Can't save a ticket.
+2021-01-10 18:18:35 INFO  TicketServiceImpl:89 - Ticket by.itacademy.domain.Ticket@c0f61308 was saved
+2021-01-10 18:18:51 ERROR TicketServiceImpl:82 - Place number 37 already exists.
+2021-01-10 18:18:51 ERROR TicketRestController:75 - Can't save a ticket.
+2021-01-10 18:24:55 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@99df2af4 was saved
+2021-01-10 18:28:09 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@6cdd46d9 was saved
+2021-01-10 18:28:25 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 18:31:01 INFO  TicketServiceImpl:89 - Ticket by.itacademy.domain.Ticket@3e812463 was saved
+2021-01-10 18:31:28 INFO  TicketServiceImpl:57 - Ticket with id 29 exists.
+2021-01-10 18:33:07 INFO  EventServiceImpl:57 - Event with id 27 exists.
+2021-01-10 18:35:17 INFO  EventServiceImpl:57 - Event with id 27 exists.
+2021-01-10 18:36:29 INFO  TicketServiceImpl:57 - Ticket with id 29 exists.
+2021-01-10 18:36:45 INFO  UserServiceImpl:57 - User with id 221 exists.
+2021-01-10 18:36:52 INFO  UserServiceImpl:57 - User with id 220 exists.
+2021-01-10 19:21:16 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@504503c6 was saved
+2021-01-10 19:22:22 INFO  EventServiceImpl:57 - Event with id 29 exists.
+2021-01-10 19:22:56 INFO  EventServiceImpl:57 - Event with id 29 exists.
+2021-01-10 19:25:16 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-10 19:29:46 INFO  EventServiceImpl:57 - Event with id 29 exists.
+2021-01-10 19:31:51 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@16a14378 was saved
+2021-01-10 19:32:06 INFO  EventServiceImpl:57 - Event with id 30 exists.
+2021-01-10 19:36:34 INFO  EventServiceImpl:57 - Event with id 30 exists.
+2021-01-10 19:40:59 INFO  EventServiceImpl:57 - Event with id 30 exists.
+2021-01-10 19:44:36 INFO  EventServiceImpl:57 - Event with id 30 exists.
+2021-01-10 19:46:17 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 19:49:29 INFO  EventServiceImpl:57 - Event with id 30 exists.
+2021-01-10 19:54:36 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@c602de25 was saved
+2021-01-10 20:06:21 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@f591a5b3 was saved
+2021-01-10 20:08:08 INFO  EventServiceImpl:57 - Event with id 32 exists.
+2021-01-10 20:18:22 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-10 20:18:34 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-10 20:18:45 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 20:19:06 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-10 20:19:18 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 20:51:11 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 20:51:41 INFO  EventServiceImpl:70 - Event by.itacademy.domain.Event@b3b12e96 was saved
+2021-01-10 20:52:58 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 21:06:12 INFO  TicketServiceImpl:89 - Ticket by.itacademy.domain.Ticket@2cce78d1 was saved
+2021-01-10 21:15:57 INFO  UserServiceImpl:33 - Users exist.
+2021-01-10 21:18:19 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-10 21:18:40 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-10 21:18:55 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-10 21:21:52 INFO  UserServiceImpl:89 - User by.itacademy.domain.User@bae96999 was saved
+2021-01-10 21:22:06 INFO  UserServiceImpl:57 - User with id 224 exists.
+2021-01-10 21:22:57 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:22:57 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:23:07 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:23:12 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:23:12 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:25:14 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:25:15 INFO  UserServiceProvider:32 - User with login John999 exists.
+2021-01-10 21:30:39 INFO  EventServiceImpl:33 - Events exist.
+2021-01-10 21:36:07 INFO  TicketServiceImpl:89 - Ticket by.itacademy.domain.Ticket@bf90c6db was saved
+2021-01-10 21:39:11 INFO  TicketServiceImpl:57 - Ticket with id 36 exists.
+2021-01-10 21:40:25 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-10 21:45:05 INFO  EventServiceImpl:57 - Event with id 26 exists.
+2021-01-10 22:20:14 INFO  UserServiceImpl:123 - User with id 221 was deleted.
+2021-01-10 22:22:22 INFO  UserServiceImpl:123 - User with id 221 was deleted.
+2021-01-10 22:25:17 INFO  UserServiceImpl:123 - User with id 220 was deleted.
+2021-01-10 22:27:13 INFO  TicketServiceImpl:123 - Ticket with id 29 was deleted.
+2021-01-10 22:30:38 INFO  UserServiceImpl:123 - User with id 220 was deleted.
+2021-01-10 22:34:24 INFO  TicketServiceImpl:123 - Ticket with id 33 was deleted.
+2021-01-10 22:34:59 INFO  UserServiceImpl:123 - User with id 220 was deleted.
+2021-01-10 22:43:58 INFO  UserServiceImpl:123 - User with id 220 was deleted.
+2021-01-10 22:46:47 INFO  UserServiceImpl:89 - User by.itacademy.domain.User@45dd3495 was saved
+2021-01-10 22:49:23 INFO  UserServiceImpl:89 - User with Bil77 was saved
+2021-01-10 22:49:49 INFO  UserServiceImpl:123 - User with id 226 was deleted.
+2021-01-10 22:50:12 INFO  UserServiceImpl:123 - User with id 222 was deleted.
+2021-01-11 00:48:41 INFO  UserServiceImpl:89 - User login1 was saved
+2021-01-11 00:55:24 INFO  UserServiceImpl:89 - User login1 was saved
+2021-01-11 01:10:05 INFO  UserServiceImpl:89 - User login2 was saved
+2021-01-11 01:11:05 ERROR UserServiceImpl:115 - User id can't be null.
+2021-01-11 01:11:05 ERROR UserRestController:114 - Can't find an user.
+2021-01-11 01:11:24 INFO  UserServiceImpl:123 - User with id 229 was deleted.
+2021-01-11 01:11:57 INFO  UserServiceImpl:89 - User login2 was saved
+2021-01-11 01:12:12 INFO  UserServiceImpl:89 - User login3 was saved
+2021-01-11 01:12:34 INFO  UserServiceImpl:89 - User login4 was saved
+2021-01-11 01:12:53 INFO  UserServiceImpl:89 - User login5 was saved
+2021-01-11 01:13:49 INFO  UserServiceImpl:57 - User with id 233 exists.
+2021-01-11 01:15:30 INFO  UserServiceImpl:123 - User with id 233 was deleted.
+2021-01-11 01:21:28 INFO  TicketServiceImpl:89 - Ticket with id 39 was saved
+2021-01-11 01:21:45 INFO  TicketServiceImpl:89 - Ticket with id 40 was saved
+2021-01-11 01:21:56 INFO  TicketServiceImpl:89 - Ticket with id 41 was saved
+2021-01-11 01:22:44 INFO  UserServiceImpl:89 - User login8 was saved
+2021-01-11 01:22:58 INFO  UserServiceImpl:89 - User login9 was saved
+2021-01-11 01:23:16 INFO  UserServiceImpl:89 - User login10 was saved
+2021-01-11 01:23:25 INFO  UserServiceImpl:89 - User login11 was saved
+2021-01-11 01:23:51 INFO  TicketServiceImpl:89 - Ticket with id 42 was saved
+2021-01-11 01:24:06 INFO  TicketServiceImpl:89 - Ticket with id 43 was saved
+2021-01-11 01:24:20 INFO  TicketServiceImpl:89 - Ticket with id 44 was saved
+2021-01-11 01:24:31 INFO  TicketServiceImpl:89 - Ticket with id 45 was saved
+2021-01-11 01:28:40 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-11 01:29:11 INFO  MovieServiceImpl:57 - Movie with id 10 exists.
+2021-01-11 01:29:22 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-11 01:29:39 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-11 01:30:13 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 01:30:51 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-11 01:31:06 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-11 01:31:19 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 01:33:04 INFO  UserServiceImpl:33 - Users exist.
+2021-01-11 01:38:10 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-11 01:38:24 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:10:42 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-11 02:10:57 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-11 02:11:13 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-11 02:11:29 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:11:47 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-11 02:12:01 INFO  UserServiceImpl:33 - Users exist.
+2021-01-11 02:25:34 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-11 02:25:44 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-11 02:25:53 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-11 02:26:01 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:28:21 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:31:09 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:34:53 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:35:05 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-11 02:39:02 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:44:42 INFO  MovieServiceImpl:33 - Movies exist.
+2021-01-11 02:44:52 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-11 02:45:00 INFO  CinemaServiceImpl:33 - Cinemas exist.
+2021-01-11 02:45:11 INFO  CinemaServiceImpl:57 - Cinema with id 53 exists.
+2021-01-11 02:45:21 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:45:40 INFO  EventServiceImpl:57 - Event with id 6 exists.
+2021-01-11 02:46:01 INFO  TicketServiceImpl:33 - Tickets exist.
+2021-01-11 02:46:25 INFO  UserServiceImpl:33 - Users exist.
+2021-01-11 02:52:13 INFO  EventServiceImpl:33 - Events exist.
+2021-01-11 02:53:09 INFO  LocationServiceImpl:33 - Locations exist.
+2021-01-11 02:53:32 INFO  EventServiceImpl:33 - Events exist.

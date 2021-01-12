@@ -53,4 +53,9 @@ public class Movie {
     @JoinColumn(name = "cinema_id", insertable = false, updatable = false)
     @JsonBackReference
     private Cinema cinema;
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

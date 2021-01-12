@@ -32,6 +32,7 @@ public class LocationRestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Location> findAllLocations() throws ControllerException {
+
         try {
             return locationService.findAll();
         } catch (ServiceException e) {
@@ -43,6 +44,7 @@ public class LocationRestController {
     @GetMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
     public Location findLocationById(@PathVariable Long locationId) throws ControllerException {
+
         try {
             return locationService.findById(locationId);
         } catch (ServiceException e) {
@@ -54,6 +56,7 @@ public class LocationRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Location saveLocation(@RequestBody LocationCreateRequest locationCreateRequest) throws ControllerException {
+
         String location = locationCreateRequest.getLocation();
 
         if (location == null || location.isEmpty()) {
@@ -64,6 +67,7 @@ public class LocationRestController {
         locationToSave.setLocation(locationCreateRequest.getLocation());
         locationToSave.setCreated(new Timestamp(System.currentTimeMillis()));
         locationToSave.setChanged(new Timestamp(System.currentTimeMillis()));
+        locationToSave.setEventId(locationCreateRequest.getEventId());
 
         try {
             return locationService.save(locationToSave);
@@ -77,6 +81,7 @@ public class LocationRestController {
     @ResponseStatus(HttpStatus.OK)
     public Location updateLocation(@PathVariable Long locationId,
                                    @RequestBody LocationCreateRequest locationCreateRequest) throws ControllerException {
+
         String location = locationCreateRequest.getLocation();
 
         if (location == null || location.isEmpty()) {
@@ -97,6 +102,7 @@ public class LocationRestController {
     @DeleteMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
     public Location deleteLocation(@PathVariable Long locationId) throws ControllerException {
+
         try {
             return locationService.delete(locationId);
         } catch (ServiceException e) {

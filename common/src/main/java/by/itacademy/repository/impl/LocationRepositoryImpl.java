@@ -26,14 +26,16 @@ public class LocationRepositoryImpl implements LocationRepository {
     @Query(value = "select l from Location l")
     @Override
     public List<Location> findAll() {
+
         try (Session session = sessionFactory.openSession()) {
-            String hqlQuery = "select u from Location u";
+            String hqlQuery = "select l from Location l";
             return session.createQuery(hqlQuery, Location.class).list();
         }
     }
 
     @Override
     public Location findById(Long locationId) {
+
         try (Session session = sessionFactory.openSession()) {
             return session.find(Location.class, locationId);
         }
@@ -41,6 +43,7 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public Location save(Location location) {
+
         try (Session session = sessionFactory.openSession()) {
             session.save(location);
             return location;
@@ -49,6 +52,7 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public Location update(Location locationId) {
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
@@ -60,6 +64,7 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public Location delete(Long locationId) {
+
         try (Session session = sessionFactory.openSession()) {
             Location locationDeleteById = session.find(Location.class, locationId);
             Transaction transaction = session.getTransaction();

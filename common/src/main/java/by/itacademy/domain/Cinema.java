@@ -58,10 +58,6 @@ public class Cinema {
     @Column(name = "location_id")
     private Long locationId;
 
-    @JsonIgnore
-    @Column(name = "event_id")
-    private Long eventId;
-
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<Movie> movies = Collections.emptySet();
@@ -71,9 +67,8 @@ public class Cinema {
     @JsonBackReference
     private Location location;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", insertable = false, updatable = false)
-    @JsonBackReference
-    private Event event;
+    @Override
+    public String toString() {
+        return name;
+    }
 }
-

@@ -24,6 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
+
         try (Session session = sessionFactory.openSession()) {
             String hqlQuery = "select u from User u";
             return session.createQuery(hqlQuery, User.class).list();
@@ -32,6 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Long userId) {
+
         try (Session session = sessionFactory.openSession()) {
             return session.find(User.class, userId);
         }
@@ -39,6 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
+
         try (Session session = sessionFactory.openSession()) {
             session.save(user);
             return user;
@@ -47,6 +50,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User update(User userId) {
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
@@ -58,6 +62,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User delete(Long userId) {
+
         try (Session session = sessionFactory.openSession()) {
             User userDeleteById = session.find(User.class, userId);
             Transaction transaction = session.getTransaction();
@@ -70,6 +75,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findByLogin(String login) {
+
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
         criteria.add(Restrictions.like("login", login));
         return (User) criteria.uniqueResult();

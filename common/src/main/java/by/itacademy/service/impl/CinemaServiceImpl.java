@@ -22,7 +22,9 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public List<Cinema> findAll() throws ServiceException {
+
         List<Cinema> existingCinemas;
+
         try {
             existingCinemas = cinemaRepository.findAll();
             if (existingCinemas.isEmpty()) {
@@ -40,6 +42,7 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public Cinema findById(Long cinemaId) throws ServiceException {
+
         Cinema cinemaToFindById;
 
         try {
@@ -65,7 +68,9 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public Cinema save(Cinema cinema) throws ServiceException {
+
         List<Cinema> existingCinemas;
+
         try {
             existingCinemas = cinemaRepository.findAll();
         } catch (RepositoryException e) {
@@ -86,7 +91,7 @@ public class CinemaServiceImpl implements CinemaService {
 
         try {
             Cinema savedCinema = cinemaRepository.save(cinema);
-            log.info("Cinema " + cinema + " was saved");
+            log.info("Cinema " + cinema + " was saved.");
             return savedCinema;
         } catch (RepositoryException e) {
             throw new ServiceException("Cinema service exception while trying to save a cinema:" + e.getMessage());
@@ -95,7 +100,9 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public Cinema update(Cinema cinema) throws ServiceException {
+
         try {
+            log.info("Cinema " + cinema + " was updated.");
             return cinemaRepository.update(cinema);
         } catch (RepositoryException e) {
             String errorMessage = "Can't get a cinema.";
@@ -106,6 +113,7 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public Cinema delete(Long cinemaId) throws ServiceException {
+
         Cinema cinemaToFindById;
 
         try {

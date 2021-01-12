@@ -22,7 +22,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> findAll() throws ServiceException {
+
         List<Movie> existingMovies;
+
         try {
             existingMovies = movieRepository.findAll();
             if (existingMovies.isEmpty()) {
@@ -40,6 +42,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findById(Long movieId) throws ServiceException {
+
         Movie movieToFindById;
 
         try {
@@ -65,7 +68,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie save(Movie movie) throws ServiceException {
+
         List<Movie> existingMovies;
+
         try {
             existingMovies = movieRepository.findAll();
         } catch (RepositoryException e) {
@@ -78,7 +83,7 @@ public class MovieServiceImpl implements MovieService {
             boolean hasSameMovie = existingMovie.getTitle().equals(movie.getTitle());
 
             if (hasSameMovie) {
-                String errorMessage = "Movie with name " + movie.getTitle() + " already exists.";
+                String errorMessage = "Movie with title " + movie.getTitle() + " already exists.";
                 log.error(errorMessage);
                 throw new ServiceException(errorMessage);
             }
@@ -95,7 +100,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie update(Movie movie) throws ServiceException {
+
         try {
+            log.info("Movie " + movie + " was updated.");
             return movieRepository.update(movie);
         } catch (RepositoryException e) {
             String errorMessage = "Can't get a movie.";
@@ -106,6 +113,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie delete(Long movieId) throws ServiceException {
+
         Movie movieToFindById;
 
         try {

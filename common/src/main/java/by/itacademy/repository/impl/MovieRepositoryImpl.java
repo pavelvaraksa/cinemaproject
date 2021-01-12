@@ -26,14 +26,16 @@ public class MovieRepositoryImpl implements MovieRepository {
     @Query(value = "select m from Movie m")
     @Override
     public List<Movie> findAll() {
+
         try (Session session = sessionFactory.openSession()) {
-            String hqlQuery = "select u from Movie u";
+            String hqlQuery = "select m from Movie m";
             return session.createQuery(hqlQuery, Movie.class).list();
         }
     }
 
     @Override
     public Movie findById(Long movieId) {
+
         try (Session session = sessionFactory.openSession()) {
             return session.find(Movie.class, movieId);
         }
@@ -41,6 +43,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
     public Movie save(Movie movie) {
+
         try (Session session = sessionFactory.openSession()) {
             session.save(movie);
             return movie;
@@ -49,6 +52,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
     public Movie update(Movie movieId) {
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
@@ -60,6 +64,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
     public Movie delete(Long movieId) {
+
         try (Session session = sessionFactory.openSession()) {
             Movie movieDeleteById = session.find(Movie.class, movieId);
             Transaction transaction = session.getTransaction();

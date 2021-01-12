@@ -32,6 +32,7 @@ public class EventRestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Event> findAllEvents() throws ControllerException {
+
         try {
             return eventService.findAll();
         } catch (ServiceException e) {
@@ -43,6 +44,7 @@ public class EventRestController {
     @GetMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
     public Event findEventById(@PathVariable Long eventId) throws ControllerException {
+
         try {
             return eventService.findById(eventId);
         } catch (ServiceException e) {
@@ -54,6 +56,7 @@ public class EventRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Event saveEvent(@RequestBody EventCreateRequest eventCreateRequest) throws ControllerException {
+
         String date = eventCreateRequest.getDate();
         String time = eventCreateRequest.getTime();
 
@@ -81,6 +84,7 @@ public class EventRestController {
     @ResponseStatus(HttpStatus.OK)
     public Event updateEvent(@PathVariable Long eventId,
                              @RequestBody EventCreateRequest eventCreateRequest) throws ControllerException {
+
         String date = eventCreateRequest.getDate();
         String time = eventCreateRequest.getTime();
 
@@ -104,6 +108,7 @@ public class EventRestController {
     @DeleteMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
     public Event deleteEvent(@PathVariable Long eventId) throws ControllerException {
+
         try {
             return eventService.delete(eventId);
         } catch (ServiceException e) {

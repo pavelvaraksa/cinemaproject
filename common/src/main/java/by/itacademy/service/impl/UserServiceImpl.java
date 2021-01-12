@@ -22,7 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() throws ServiceException {
+
         List<User> existingUsers;
+
         try {
             existingUsers = userRepository.findAll();
             if (existingUsers.isEmpty()) {
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long userId) throws ServiceException {
+
         User userToFindById;
 
         try {
@@ -65,7 +68,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) throws ServiceException {
+
         List<User> existingUsers;
+
         try {
             existingUsers = userRepository.findAll();
         } catch (RepositoryException e) {
@@ -86,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
         try {
             User savedUser = userRepository.save(user);
-            log.info("User " + user + " was saved");
+            log.info("User with login " + user + " was saved.");
             return savedUser;
         } catch (RepositoryException e) {
             throw new ServiceException("User service exception while trying to save user:" + e.getMessage());
@@ -95,7 +100,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) throws ServiceException {
+
         try {
+            log.info("User with login " + user + " was updated.");
             return userRepository.update(user);
         } catch (RepositoryException e) {
             String errorMessage = "Can't get an user.";
@@ -106,6 +113,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User delete(Long userId) throws ServiceException {
+
         User userToFindById;
 
         try {

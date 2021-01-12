@@ -22,7 +22,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<Location> findAll() throws ServiceException {
+
         List<Location> existingLocations;
+
         try {
             existingLocations = locationRepository.findAll();
             if (existingLocations.isEmpty()) {
@@ -40,6 +42,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location findById(Long locationId) throws ServiceException {
+
         Location locationToFindById;
 
         try {
@@ -65,7 +68,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location save(Location location) throws ServiceException {
+
         List<Location> existingLocations;
+
         try {
             existingLocations = locationRepository.findAll();
         } catch (RepositoryException e) {
@@ -86,7 +91,7 @@ public class LocationServiceImpl implements LocationService {
 
         try {
             Location savedLocation = locationRepository.save(location);
-            log.info("Location " + location + " was saved");
+            log.info("Location " + location + " was saved.");
             return savedLocation;
         } catch (RepositoryException e) {
             throw new ServiceException("Location service exception while trying to save a location:" + e.getMessage());
@@ -95,7 +100,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location update(Location location) throws ServiceException {
+
         try {
+            log.info("Location " + location + " was updated.");
             return locationRepository.update(location);
         } catch (RepositoryException e) {
             String errorMessage = "Can't get a location.";
@@ -106,6 +113,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location delete(Long locationId) throws ServiceException {
+
         Location locationToFindById;
 
         try {

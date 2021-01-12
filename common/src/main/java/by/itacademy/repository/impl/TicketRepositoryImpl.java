@@ -22,14 +22,16 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public List<Ticket> findAll() {
+
         try (Session session = sessionFactory.openSession()) {
-            String hqlQuery = "select u from Ticket u";
+            String hqlQuery = "select t from Ticket t";
             return session.createQuery(hqlQuery, Ticket.class).list();
         }
     }
 
     @Override
     public Ticket findById(Long ticketId) {
+
         try (Session session = sessionFactory.openSession()) {
             return session.find(Ticket.class, ticketId);
         }
@@ -37,6 +39,7 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Ticket save(Ticket ticket) {
+
         try (Session session = sessionFactory.openSession()) {
             session.save(ticket);
             return ticket;
@@ -45,6 +48,7 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Ticket update(Ticket ticketId) {
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
@@ -56,6 +60,7 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Ticket delete(Long ticketId) {
+
         try (Session session = sessionFactory.openSession()) {
             Ticket ticketDeleteById = session.find(Ticket.class, ticketId);
             Transaction transaction = session.getTransaction();

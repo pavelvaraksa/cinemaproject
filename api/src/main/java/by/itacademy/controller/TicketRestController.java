@@ -32,6 +32,7 @@ public class TicketRestController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Ticket> findAllTickets() throws ControllerException {
+
         try {
             return ticketService.findAll();
         } catch (ServiceException e) {
@@ -43,6 +44,7 @@ public class TicketRestController {
     @GetMapping("/{ticketId}")
     @ResponseStatus(HttpStatus.OK)
     public Ticket findTicketById(@PathVariable Long ticketId) throws ControllerException {
+
         try {
             return ticketService.findById(ticketId);
         } catch (ServiceException e) {
@@ -54,6 +56,7 @@ public class TicketRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Ticket saveTicket(@RequestBody TicketCreateRequest ticketCreateRequest) throws ControllerException {
+
         int placeNumber = ticketCreateRequest.getPlaceNumber();
         double price = ticketCreateRequest.getPrice();
 
@@ -67,7 +70,6 @@ public class TicketRestController {
         ticketToSave.setCreated(new Timestamp(System.currentTimeMillis()));
         ticketToSave.setChanged(new Timestamp(System.currentTimeMillis()));
         ticketToSave.setUserId(ticketCreateRequest.getUserId());
-        ticketToSave.setEventId(ticketCreateRequest.getEventId());
 
         try {
             return ticketService.save(ticketToSave);
@@ -81,6 +83,7 @@ public class TicketRestController {
     @ResponseStatus(HttpStatus.OK)
     public Ticket updateTicket(@PathVariable Long ticketId,
                                @RequestBody TicketCreateRequest ticketCreateRequest) throws ControllerException {
+
         int placeNumber = ticketCreateRequest.getPlaceNumber();
         double price = ticketCreateRequest.getPrice();
 
@@ -103,6 +106,7 @@ public class TicketRestController {
     @DeleteMapping("/{ticketId}")
     @ResponseStatus(HttpStatus.OK)
     public Ticket deleteTicket(@PathVariable Long ticketId) throws ControllerException {
+
         try {
             return ticketService.delete(ticketId);
         } catch (ServiceException e) {

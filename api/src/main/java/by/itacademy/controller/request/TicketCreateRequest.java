@@ -14,6 +14,4 @@ public class TicketCreateRequest {
     private double price;
 
     private Long userId;
-
-    private Long eventId;
 }

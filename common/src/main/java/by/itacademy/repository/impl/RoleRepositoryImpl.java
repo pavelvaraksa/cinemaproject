@@ -22,21 +22,24 @@ public class RoleRepositoryImpl implements RoleRepository {
 
     @Override
     public List<UserRole> findAll() {
+
         try (Session session = sessionFactory.openSession()) {
-            String hqlQuery = "select u from UserRole u";
+            String hqlQuery = "select r from UserRole r";
             return session.createQuery(hqlQuery, UserRole.class).list();
         }
     }
 
     @Override
-    public UserRole findById(Long userId) {
+    public UserRole findById(Long roleId) {
+
         try (Session session = sessionFactory.openSession()) {
-            return session.find(UserRole.class, userId);
+            return session.find(UserRole.class, roleId);
         }
     }
 
     @Override
     public UserRole save(UserRole userRole) {
+
         try (Session session = sessionFactory.openSession()) {
             session.save(userRole);
             return userRole;
@@ -44,25 +47,27 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public UserRole update(UserRole userId) {
+    public UserRole update(UserRole roleId) {
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.getTransaction();
             transaction.begin();
-            session.update(userId);
+            session.update(roleId);
             transaction.commit();
-            return userId;
+            return roleId;
         }
     }
 
     @Override
-    public UserRole delete(Long userId) {
+    public UserRole delete(Long roleId) {
+
         try (Session session = sessionFactory.openSession()) {
-            UserRole userDeleteById = session.find(UserRole.class, userId);
+            UserRole roleDeleteById = session.find(UserRole.class, roleId);
             Transaction transaction = session.getTransaction();
             transaction.begin();
-            session.delete(userDeleteById);
+            session.delete(roleDeleteById);
             transaction.commit();
-            return userDeleteById;
+            return roleDeleteById;
         }
     }
 }

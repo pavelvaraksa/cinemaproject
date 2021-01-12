@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
-import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
@@ -29,7 +29,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "m_event")
-@EqualsAndHashCode(exclude = {"cinemas"})
+@EqualsAndHashCode(exclude = {"locations"})
 public class Event {
 
     @Id
@@ -52,19 +52,20 @@ public class Event {
     private Timestamp changed;
 
     @JsonIgnore
-    @Column(name = "cinema_id")
-    private Long cinemaId;
-
-    @JsonIgnore
     @Column(name = "ticket_id")
     private Long ticketId;
 
-    @OneToOne
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Location> locations = Collections.emptySet();
+
+    @ManyToOne
     @JoinColumn(name = "ticket_id", insertable = false, updatable = false)
     @JsonBackReference
     private Ticket ticket;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Cinema> cinemas = Collections.emptySet();
+    @Override
+    public String toString() {
+        return "with id " + id;
+    }
 }

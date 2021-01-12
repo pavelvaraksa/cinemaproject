@@ -22,7 +22,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> findAll() throws ServiceException {
+
         List<Ticket> existingTickets;
+
         try {
             existingTickets = ticketRepository.findAll();
             if (existingTickets.isEmpty()) {
@@ -40,6 +42,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket findById(Long ticketId) throws ServiceException {
+
         Ticket ticketToFindById;
 
         try {
@@ -54,7 +57,7 @@ public class TicketServiceImpl implements TicketService {
         }
 
         try {
-            log.info("Ticket with id " + ticketId + " exists.");
+            log.info("Ticket " + ticketId + " exists.");
             return ticketRepository.findById(ticketId);
         } catch (RepositoryException e) {
             String errorMessage = "Can't find a ticket.";
@@ -65,7 +68,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket save(Ticket ticket) throws ServiceException {
+
         List<Ticket> existingTickets;
+
         try {
             existingTickets = ticketRepository.findAll();
         } catch (RepositoryException e) {
@@ -86,7 +91,7 @@ public class TicketServiceImpl implements TicketService {
 
         try {
             Ticket savedTicket = ticketRepository.save(ticket);
-            log.info("Ticket " + ticket + " was saved");
+            log.info("Ticket " + ticket + " was saved.");
             return savedTicket;
         } catch (RepositoryException e) {
             throw new ServiceException("Ticket service exception while trying to save a ticket:" + e.getMessage());
@@ -95,7 +100,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket update(Ticket ticket) throws ServiceException {
+
         try {
+            log.info("Ticket " + ticket + " was updated.");
             return ticketRepository.update(ticket);
         } catch (RepositoryException e) {
             String errorMessage = "Can't get a ticket.";
@@ -106,6 +113,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket delete(Long ticketId) throws ServiceException {
+
         Ticket ticketToFindById;
 
         try {
@@ -120,7 +128,7 @@ public class TicketServiceImpl implements TicketService {
         }
 
         try {
-            log.info("Ticket with id " + ticketId + " was deleted.");
+            log.info("Ticket " + ticketId + " was deleted.");
             return ticketRepository.delete(ticketId);
         } catch (RepositoryException e) {
             String errorMessage = "Can't find a ticket.";

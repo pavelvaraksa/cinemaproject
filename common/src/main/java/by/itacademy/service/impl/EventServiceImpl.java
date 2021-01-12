@@ -22,7 +22,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> findAll() throws ServiceException {
+
         List<Event> existingEvents;
+
         try {
             existingEvents = eventRepository.findAll();
             if (existingEvents.isEmpty()) {
@@ -40,6 +42,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event findById(Long eventId) throws ServiceException {
+
         Event eventToFindById;
 
         try {
@@ -65,18 +68,41 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event save(Event event) throws ServiceException {
+
+        List<Event> existingEvents;
+
+        try {
+            existingEvents = eventRepository.findAll();
+        } catch (RepositoryException e) {
+            String errorMessage = "Can't get all events.";
+            log.error(errorMessage);
+            throw new ServiceException(errorMessage);
+        }
+
+        for (Event existingEvent : existingEvents) {
+            boolean hasSameEvent = existingEvent.getDate().equals(event.getDate());
+
+            if (hasSameEvent) {
+                String errorMessage = "Event " + event.getId() + " already exists.";
+                log.error(errorMessage);
+                throw new ServiceException(errorMessage);
+            }
+        }
+
         try {
             Event savedEvent = eventRepository.save(event);
-            log.info("Event " + event + " was saved");
+            log.info("Event " + event.getId() + " was saved.");
             return savedEvent;
         } catch (RepositoryException e) {
-            throw new ServiceException("Event service exception while trying to save an event:" + e.getMessage());
+            throw new ServiceException("Event service exception while trying to save a event:" + e.getMessage());
         }
     }
 
     @Override
     public Event update(Event event) throws ServiceException {
+
         try {
+            log.info("Event " + event.getId() + " was updated.");
             return eventRepository.update(event);
         } catch (RepositoryException e) {
             String errorMessage = "Can't get an event.";
@@ -87,6 +113,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event delete(Long eventId) throws ServiceException {
+
         Event eventToFindById;
 
         try {
@@ -101,7 +128,7 @@ public class EventServiceImpl implements EventService {
         }
 
         try {
-            log.info("Event with id " + eventId + " was deleted.");
+            log.info("Event " + eventId + " was deleted.");
             return eventRepository.delete(eventId);
         } catch (RepositoryException e) {
             String errorMessage = "Can't find an event.";

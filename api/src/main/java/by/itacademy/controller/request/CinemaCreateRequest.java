@@ -18,6 +18,4 @@ public class CinemaCreateRequest {
     private String paymentMethod;
 
     private Long locationId;
-
-    private Long eventId;
 }

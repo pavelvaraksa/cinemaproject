@@ -43,4 +43,9 @@ public class UserRole {
         this.roleName = roleName;
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "role " + roleName;
+    }
 }
