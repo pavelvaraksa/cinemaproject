@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: "jdbc:postgresql://localhost:5432/cinema_project_database?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: false
+    ignore-missing-migrations: true
+    locations: classpath:/migration
+    baseline-on-migrate: true
+    baseline-description: Flyway Scripts
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+jwtconfig:
+  secret: secret
+  expiration: 100000
+
+amazon:
+  images:
+    s3: htpprojectimages
+    accessKeyId: someToken
+    secretKey: password
+    bucket: finalprojectjd2
+    serverUrl: "https://htpprojectimages.s3.eu-central-1.amazonaws.com"
+    userFolder: users
+    region: eu-central-1
